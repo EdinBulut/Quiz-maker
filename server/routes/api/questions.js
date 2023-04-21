@@ -1,17 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const Question = require('../../models/question');
 
-require('dotenv').config();
-const db = process.env.MONGO_DATABASE;
-
-mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
-  .then(() => console.log('Connected to DB'))
-  .catch((err) => {
-    console.log(`there is a problem with: ${err.message}`);
-    process.exit(-1)
-  })
 
 router.get('/', (req, res) => {
   Question.find()

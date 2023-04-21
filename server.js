@@ -4,6 +4,16 @@ const cors = require('cors'); // should be removed later
 const questionsAPI = require('./server/routes/api/questions');
 const quizzesAPI = require('./server/routes/api/quizzes');
 
+const mongoose = require('mongoose');
+require('dotenv').config();
+const db = process.env.MONGO_DATABASE;
+mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
+  .then(() => console.log('Connected to DB'))
+  .catch((err) => {
+    console.log(`there is a problem with: ${err.message}`);
+    process.exit(-1)
+})
+
 const PORT = process.env.PORT || 3000;
 const app = express();
 
