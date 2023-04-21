@@ -16,13 +16,9 @@ export class QuizzesService {
 
   constructor(private http: HttpClient) { }
 
+  //GET START
   getQuizzes(): Observable<Quiz[]> {
     return this.http.get<Quiz[]>(this.quizzesUrl);
-  }
-  
-
-  createQuiz(quiz: {name: string, questionIDs: string[]}): Observable<any> {
-    return this.http.post<any>(this.quizzesUrl, quiz, this.httpOptions);
   }
 
 
@@ -30,10 +26,30 @@ export class QuizzesService {
     const url = `${this.quizzesUrl}/${id}`;
     return this.http.get<Quiz>(url);
   }
-  
+
+
   searchQuizzes(search: string): Observable<Quiz> {
     const url = `${this.quizzesUrl}/search/${search}`;
     return this.http.get<Quiz>(url);
   }
+  //GET END
+
+
+  //UPDATE START
+  insertQuestionIntoQuiz(insertQuestionObj: {quizID: string, questionID: string}): Observable<any> {
+    const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/questions/${insertQuestionObj.questionID}`;
+    return this.http.put(url, insertQuestionObj, this.httpOptions);
+  }
+  //UPDATE END
+
+
+  //CREATE START
+  createQuiz(quiz: { name: string, questionIDs: string[] }): Observable<any> {
+    return this.http.post<any>(this.quizzesUrl, quiz, this.httpOptions);
+  }
+  //CREATE END
+
+
+
 
 }
