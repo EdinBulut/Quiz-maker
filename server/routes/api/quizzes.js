@@ -3,7 +3,10 @@ const router = express.Router();
 const Quiz = require('../../models/quiz');
 
 router.get('/', (req, res) => {
-  Quiz.find()
+  // Quiz.aggregate([
+  //   {$lookup: {from: 'questions', localField: 'questions', foreignField:'_id', as: 'questions'}}
+  // ]) // --> also works fine
+  Quiz.find().populate('questions')
     .then(quizzes => {
       res.json(quizzes);
     })
