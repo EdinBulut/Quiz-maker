@@ -43,7 +43,15 @@ export class AppComponent implements OnInit{
     this.quizzesService.createQuiz({name: 'Novi kviz', questionIDs: ['6441af1dfa180794e978e123']})
     .subscribe(
       {next: (data) => console.log('created', data), 
-      error: (err) => console.error('some error', err)}
+      error: (err) => console.error(err)}
+      )
+  }
+
+  insertQuestionInQuiz(){
+    this.quizzesService.insertQuestionIntoQuiz({quizID: '6442651ad71f4a3dc492faf0', questionID: '6441af1dfa180794e978e123'})
+    .subscribe(
+      {next: (data) => console.log('updated quiz', data), 
+      error: (err) => console.error(err)}
       )
   }
 
