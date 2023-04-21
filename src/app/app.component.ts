@@ -4,6 +4,8 @@ import { Observable, tap } from 'rxjs';
 import { Question } from './models/question-model';
 import { } from 'rxjs/operators'
 import { QuizzesService } from './services/quizzes.service';
+import { Quiz } from './models/quiz-model';
+
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,7 @@ import { QuizzesService } from './services/quizzes.service';
 export class AppComponent implements OnInit{
   title = 'Quiz-maker';
   questions$!: Observable<Question[]>
+  quizes$!: Observable<Quiz[]>
   constructor(
     private questionsService: QuestionsService,
     private quizzesService: QuizzesService
@@ -24,8 +27,24 @@ export class AppComponent implements OnInit{
     .pipe(
       tap(data => console.log('questions', data))
     )
-    this.quizzesService.getQuizzes().subscribe(data => console.log('all quizzes', data))
-    this.quizzesService.searchQuizzes('TEST').subscribe(data => console.log('searched quizzes', data))
+    this.quizes$ = this.quizzesService.getQuizzes()
+    .pipe(
+      tap(quizes => console.log(quizes))
+    )
+    
+    this.quizzesService.searchQuizzes('TEST')
+    .subscribe(
+      {next: (data) => console.log('searched quizzes', data), 
+      error: (err) => console.error(err)}
+      )
+  }
+
+  createQuiz() {
+    this.quizzesService.createQuiz({name: 'Novi kviz', questionIDs: ['6441af1dfa180794e978e123']})
+    .subscribe(
+      {next: (data) => console.log('created', data), 
+      error: (err) => console.error('some error', err)}
+      )
   }
 
 }

@@ -3,7 +3,12 @@
   <div *ngFor="let question of questions">
       {{question.question}} : {{question.answer}}
   </div>
+
+  <ng-container *ngFor="let quiz of quizes$ | async">
+    <pre>{{quiz | json}}</pre>
+  </ng-container>
   
+  <button (click)="createQuiz()">Create</button>
 </ng-container>
 <ng-template #loadingQuestions>
   loading..
