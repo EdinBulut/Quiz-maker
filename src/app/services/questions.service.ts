@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class QuestionsService {
 
-  // private videoUrl = '/api/questions';
-  private questionsUrl = 'http://localhost:3000/api/questions';
+  // private questionsUrl = '/questions';
+  private questionsUrl = 'http://localhost:3000/questions';
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(private http: HttpClient) { }
