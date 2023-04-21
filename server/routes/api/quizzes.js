@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Quiz = require('../../models/quiz');
+const mongoose = require('mongoose');
+
 
 router.get('/', (req, res) => {
   // Quiz.aggregate([
@@ -35,8 +37,16 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  let questionData = req.body;
-  const question = new Quiz(questionData);
+  const body = req.body;
+  const questionsIDs = body.questionIDs.map(ID => new mongoose.Types.ObjectId(ID))
+
+  const createQuizObj = {
+    name: body.name,
+    questions: questionsIDs
+  }
+
+
+  const question = new Quiz(createQuizObj);
   question.save()
     .then(insertedQuiz => res.json(insertedQuiz))
     .catch(err => res.json({
