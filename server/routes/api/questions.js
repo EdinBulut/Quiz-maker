@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const Question = require('../models/question');
-const fs = require('fs');
+const Question = require('../../models/question');
+
 require('dotenv').config();
 const db = process.env.MONGO_DATABASE;
 
@@ -13,7 +13,7 @@ mongoose.connect(db, {useNewUrlParser: true, useUnifiedTopology: true})
     process.exit(-1)
   })
 
-router.get('/questions', (req, res) => {
+router.get('/', (req, res) => {
   Question.find()
     .then(questions => {
       res.json(questions);
@@ -21,14 +21,14 @@ router.get('/questions', (req, res) => {
     .catch(err => console.log(err.message))
 })
 
-router.get('/questions/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   Question.findById(req.params.id)
     .then(question => res.json(question))
     .catch(err => console.log(err.message))
 })
 
-router.post('/questions', (req, res) => {
-  let questionData = req.body;
+router.post('/', (req, res) => {
+  const questionData = req.body;
   const question = new Question(questionData);
   question.save()
     .then(insertedQuestion => res.json(insertedQuestion))
@@ -39,15 +39,15 @@ router.post('/questions', (req, res) => {
 })
 
 router.put('/questions/:id', async (req, res) => {
+  const body = req.body
 
   try {
     const updatedQuestion = await Question.updateOne({
       _id: req.params.id
     }, {
       $set: {
-        title: req.body.title,
-        url: req.body.url,
-        description: req.body.description
+        question: body.question,
+        answer: body.answer
       }
     })
     res.json(updatedQuestion)
