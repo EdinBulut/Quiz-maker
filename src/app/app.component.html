@@ -8,8 +8,9 @@
     <pre>{{quiz | json}}</pre>
   </ng-container>
   
-  <button (click)="createQuiz()">Create</button>
-  <button (click)="insertQuestionInQuiz()">Insert question</button>
+  <button (click)="createQuiz()">Create quiz</button>
+  <button (click)="insertQuestionIntoQuiz()">Insert question</button>
+  <button (click)="removeQuestionFromQuiz()">Remove question from quiz</button>
 </ng-container>
 <ng-template #loadingQuestions>
   loading..

@@ -47,10 +47,18 @@ export class AppComponent implements OnInit{
       )
   }
 
-  insertQuestionInQuiz(){
+  insertQuestionIntoQuiz(){
     this.quizzesService.insertQuestionIntoQuiz({quizID: '6442651ad71f4a3dc492faf0', questionID: '6441af1dfa180794e978e123'})
     .subscribe(
-      {next: (data) => console.log('updated quiz', data), 
+      {next: (data) => console.log('added question', data), 
+      error: (err) => console.error(err)}
+      )
+  }
+
+  removeQuestionFromQuiz(){
+    this.quizzesService.removeQuestionFromQuiz({quizID: '6442651ad71f4a3dc492faf0', questionIDs: ['6441af1dfa180794e978e123', '123456', 'a1a2a3']})
+    .subscribe(
+      {next: (data) => console.log('removed question', data), 
       error: (err) => console.error(err)}
       )
   }
