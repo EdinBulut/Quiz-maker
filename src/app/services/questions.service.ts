@@ -14,11 +14,20 @@ export class QuestionsService {
 
   constructor(private http: HttpClient) { }
 
+
   getQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(this.questionsUrl);
   }
 
+
   createQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.questionsUrl, question, this.httpOptions);
   }
+
+
+  deleteQuestion(questionID: string): Observable<any> {
+    const url = `${this.questionsUrl}/${questionID}`;
+    return this.http.delete<any>(url, this.httpOptions);
+  }
+
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Question = require('../../models/question');
+const Quiz = require('../../models/quiz');
 
 
 router.get('/', (req, res) => {
@@ -28,7 +29,7 @@ router.post('/', (req, res) => {
 
 })
 
-router.put('/questions/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   const body = req.body
 
   try {
@@ -49,13 +50,34 @@ router.put('/questions/:id', async (req, res) => {
 
 })
 
-router.delete('/questions/:id', (req, res) => {
-  // Question.remove({_id: req.params.id})
-  Question.findByIdAndRemove(req.params.id)
-    .then(deletedQuestion => res.json(deletedQuestion))
-    .catch(err => res.json({
-      message: err
-    }))
-})
+
+
+
+
+router.delete('/:id', async (req, res) => {
+  const questionId = req.params.id;
+
+  try {
+    // Find all quizzes that contain the deleted question's ID
+    const quizzesToUpdate = await Quiz.find({ questions: questionId });
+
+    // Remove the deleted question's ID from the questions array in each of the found quizzes
+    const updateOperations = quizzesToUpdate.map(quiz => {
+      const updatedQuestions = quiz.questions.filter(q => q.toString() !== questionId);
+      return Quiz.findByIdAndUpdate(quiz._id, { questions: updatedQuestions }, { new: true });
+    });
+
+    // Execute all update operations in parallel
+    const updatedQuizzes = await Promise.all(updateOperations);
+
+    // Delete the question from the database
+    const deletedQuestion = await Question.findByIdAndRemove(questionId);
+
+    // Return the deleted question and the updated quizzes
+    res.json({ deletedQuestion, updatedQuizzes });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;
