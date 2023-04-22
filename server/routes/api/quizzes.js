@@ -126,34 +126,33 @@ router.put('/:quizID/remove/questions', async (req, res) => {
 
 
 
-
-
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   const quizID = req.params.id;
   let { name, addQuestions, removeQuestions } = req.body;
 
-  const updateObject = {};
+  try {
+    let updatedQuiz
 
-  if (name) updateObject.$set = {name};
-  if (addQuestions) {
-    addQuestions = addQuestions.map(qID => new mongoose.Types.ObjectId(qID));
-    updateObject.$push = { questions: { $each: addQuestions } };
-  }
-  if (removeQuestions) {
-    removeQuestions = removeQuestions.map(qID => new mongoose.Types.ObjectId(qID))
-    updateObject.$pull = { questions: { $in: removeQuestions } };
-  }
-  console.log(updateObject)
-  console.log('remove Qs: ', removeQuestions)
+    if (addQuestions) {
+      addQuestions = addQuestions.map(qID => new mongoose.Types.ObjectId(qID));
+      const updateObj = { $addToSet: { questions: { $each: addQuestions } } }
+      if (name) updateObj.$set = { name }
+      updatedQuiz = await Quiz.findByIdAndUpdate(quizID, updateObj, { new: true }).populate('questions');
+    }
 
-  Quiz.findByIdAndUpdate(quizID, updateObject, { new: true }).populate('questions')
-    .then(updatedQuiz => {
-      if (!updatedQuiz) res.status(404).json({ message: `Quiz with ID: ${quizID} not found.` });
-      else res.json(updatedQuiz)
-    })
-    .catch(error => {
-      res.status(500).json({ message: error.message });
-    });
+    if (removeQuestions) {
+      removeQuestions = removeQuestions.map(qID => new mongoose.Types.ObjectId(qID));
+      const updateObj = { $pull: { questions: { $in: removeQuestions } } }
+      if (name && !addQuestions) updateObj.$set = { name }
+      updatedQuiz = await Quiz.findByIdAndUpdate(quizID, updateObj, { new: true }).populate('questions');
+    }
+
+    if (!updatedQuiz) res.status(404).json({ message: `Quiz with ID: ${quizID} not found.` });
+    else res.json(updatedQuiz)
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 
