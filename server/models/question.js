@@ -6,4 +6,6 @@ const questionSchema = new Schema({
   answer: String
 }, { versionKey: false })
 
-module.exports = mongoose.model('Question', questionSchema)
+const Question = mongoose.model('Question', questionSchema)
+
+module.exports = Question
