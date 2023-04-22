@@ -128,28 +128,28 @@ router.put('/:quizID/remove/questions', async (req, res) => {
 
 
 
-
-
-router.put('/quizzes/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const quizID = req.params.id;
   let { name, addQuestions, removeQuestions } = req.body;
 
   const updateObject = {};
 
-  if (name) updateObject.name = name;
+  if (name) updateObject.$set = {name};
   if (addQuestions) {
     addQuestions = addQuestions.map(qID => new mongoose.Types.ObjectId(qID));
     updateObject.$push = { questions: { $each: addQuestions } };
   }
-  if (removeQuestions) updateObject.$pull = { questions: { _id: { $in: removeQuestions } } };
+  if (removeQuestions) {
+    removeQuestions = removeQuestions.map(qID => new mongoose.Types.ObjectId(qID))
+    updateObject.$pull = { questions: { $in: removeQuestions } };
+  }
+  console.log(updateObject)
+  console.log('remove Qs: ', removeQuestions)
 
-  Quiz.findByIdAndUpdate(quizID, updateObject, { new: true })
+  Quiz.findByIdAndUpdate(quizID, updateObject, { new: true }).populate('questions')
     .then(updatedQuiz => {
-      if (!updatedQuiz) {
-        res.status(404).json({ message: `Quiz with ID: ${quizID} not found.` });
-      } else {
-        res.json(updatedQuiz);
-      }
+      if (!updatedQuiz) res.status(404).json({ message: `Quiz with ID: ${quizID} not found.` });
+      else res.json(updatedQuiz)
     })
     .catch(error => {
       res.status(500).json({ message: error.message });

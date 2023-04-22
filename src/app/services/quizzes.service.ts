@@ -36,6 +36,12 @@ export class QuizzesService {
 
 
   //UPDATE START
+  updateQuiz(quizID: string,  updateObj: {name?: string, addQuestions?: string[], removeQuestions?: string[]}): Observable<any> {
+    const url = `${this.quizzesUrl}/${quizID}`;
+    return this.http.put(url, updateObj, this.httpOptions);
+  }
+
+
   insertQuestionIntoQuiz(insertQuestionObj: {quizID: string, questionID: string}): Observable<any> {
     const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/add/questions/${insertQuestionObj.questionID}`;
     return this.http.put(url, insertQuestionObj, this.httpOptions);
