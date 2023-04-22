@@ -47,16 +47,24 @@ export class AppComponent implements OnInit{
       )
   }
 
+  updateQuiz() {
+    this.quizzesService.updateQuiz('6442651ad71f4a3dc492faf0', { name: 'Dzoni', removeQuestions: ['6444480d537f789639099262'], addQuestions: ['6442af1f537f789639099254', '6444514f537f789639099269']})
+    .subscribe({next: (data) => console.log('updated', data), 
+      error: (err) => console.error(err),
+      complete: () => console.log('Quiz update completed')
+    })
+  }
+
   insertQuestionIntoQuiz(){
-    this.quizzesService.insertQuestionIntoQuiz({quizID: '6442651ad71f4a3dc492faf0', questionID: '6441af1dfa180794e978e123'})
+    this.quizzesService.insertQuestionIntoQuiz({quizID: '6442651ad71f4a3dc492faf0', questionID: '6444480d537f789639099262'})
     .subscribe(
       {next: (data) => console.log('added question', data), 
       error: (err) => console.error(err)}
-      )
+    )
   }
 
   removeQuestionFromQuiz(){
-    this.quizzesService.removeQuestionFromQuiz({quizID: '6442651ad71f4a3dc492faf0', questionIDs: ['6441af1dfa180794e978e123', '123456', 'a1a2a3']})
+    this.quizzesService.removeQuestionFromQuiz({quizID: '6442651ad71f4a3dc492faf0', questionIDs: ['6444480d537f789639099262', '1233']})
     .subscribe(
       {next: (data) => console.log('removed question', data), 
       error: (err) => console.error(err)}
