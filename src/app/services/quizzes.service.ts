@@ -37,7 +37,13 @@ export class QuizzesService {
 
   //UPDATE START
   insertQuestionIntoQuiz(insertQuestionObj: {quizID: string, questionID: string}): Observable<any> {
-    const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/questions/${insertQuestionObj.questionID}`;
+    const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/add/questions/${insertQuestionObj.questionID}`;
+    return this.http.put(url, insertQuestionObj, this.httpOptions);
+  }
+
+  
+  removeQuestionFromQuiz(insertQuestionObj: {quizID: string, questionIDs: string[]}): Observable<any> {
+    const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/remove/questions`;
     return this.http.put(url, insertQuestionObj, this.httpOptions);
   }
   //UPDATE END

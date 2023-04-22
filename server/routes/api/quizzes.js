@@ -60,65 +60,101 @@ router.post('/', (req, res) => {
   const question = new Quiz(createQuizObj);
   question.save()
     .then(insertedQuiz => res.json(insertedQuiz))
-    .catch(err => res.json({
-      message: err
-    }))
+    .catch(err => res.json({message: err}))
 })
 
 
 
 
-router.put('/:quizID/questions/:questionID', async (req, res) => {
+
+router.put('/:quizID/add/questions/:questionID', async (req, res) => {
   const quizID = new mongoose.Types.ObjectId(req.params.quizID)
   const questionID = new mongoose.Types.ObjectId(req.params.questionID)
 
-  try {
-    const isDuplicate = await Quiz.findOne({_id: quizID,questions: {$in: [questionID]}})
-    if (!!isDuplicate) res.status(409).json({ message: "Item already exists"})
-    // else insertQuestionIntoQuiz(quizID, questionID, res)
+  Quiz.findOne({_id: quizID, questions: {$in: [questionID]}})
+  .then(foundQuiz => {
+    if (!!foundQuiz) res.status(409).json({ message: "Item already exists"})
     else {
-      try {
-        const updatedQuiz = await Quiz.updateOne({_id: quizID}, {$push: {"questions": {_id: questionID}}})
-        if (updatedQuiz) {
-          Question.findById(req.params.questionID).then(foundQestion => {
-            res.json(foundQestion)
-          })
-        }
-      } catch (err) {
-        res.status(500).json({
-          message: err.message
-        })
-      }
+      Quiz.findOneAndUpdate({_id: quizID}, {$push: {"questions": {_id: questionID} } }, { new: true }).populate('questions')
+      .then(updatedQuiz => {
+        const foundQuestion = updatedQuiz['questions'].find(q => q._id == req.params.questionID)
+        res.json(foundQuestion)
+      })
+      .catch(err => res.status(500).json({message: err.message}))
     }
-  }
-  catch (err) {
-    res.status(500).json({
-      message: err.message
-    })
-  }
+  })
+  .catch(err => res.status(500).json({message: err.message}))
 })
 
 
 
 
 
-router.put('/:id', async (req, res) => {
+router.put('/:quizID/remove/questions', async (req, res) => {
+  const quizID = new mongoose.Types.ObjectId(req.params.quizID);
+  const questionIDs = req.body.questionIDs
+
   try {
-    const updatedQuiz = await Quiz.updateOne({
-      _id: req.params.id
-    }, {
-      $set: {
-        name: req.body.name,
+    const quiz = await Quiz.findById(quizID);
+
+    if (!quiz) {
+      res.status(404).json({ message: `Couldnt find quiz with ID: ${quizID}` })
+      return
+    }
+
+    const updatedQuestions = quiz.questions.filter(question => questionIDs.includes(question._id))
+    const removedQuestions = quiz.questions.filter(question => !questionIDs.includes(question._id))
+
+    if (updatedQuestions.length !== quiz.questions.length) {
+      // at least one question was removed, so update the quiz
+      const result = await Quiz.updateOne(
+        { _id: quizID },
+        { $set: { questions: updatedQuestions } }
+      );
+    }
+    
+    else {
+      res.status(404).json({ message: `None of the given question IDs match, so there is no any update` })
+      return
+    }
+
+    res.json({ removedQuestionIDs: removedQuestions });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
+
+
+
+
+
+router.put('/quizzes/:id', (req, res) => {
+  const quizID = req.params.id;
+  let { name, addQuestions, removeQuestions } = req.body;
+
+  const updateObject = {};
+
+  if (name) updateObject.name = name;
+  if (addQuestions) {
+    addQuestions = addQuestions.map(qID => new mongoose.Types.ObjectId(qID));
+    updateObject.$push = { questions: { $each: addQuestions } };
+  }
+  if (removeQuestions) updateObject.$pull = { questions: { _id: { $in: removeQuestions } } };
+
+  Quiz.findByIdAndUpdate(quizID, updateObject, { new: true })
+    .then(updatedQuiz => {
+      if (!updatedQuiz) {
+        res.status(404).json({ message: `Quiz with ID: ${quizID} not found.` });
+      } else {
+        res.json(updatedQuiz);
       }
     })
-    res.json(updatedQuiz)
-  } catch (err) {
-    res.json({
-      message: err
-    })
-  }
-
-})
+    .catch(error => {
+      res.status(500).json({ message: error.message });
+    });
+});
 
 
 
@@ -136,21 +172,3 @@ router.delete('/:id', (req, res) => {
 
 
 module.exports = router;
-
-
-
-
-// async function insertQuestionIntoQuiz(quizID, questionID, res) {
-//   try {
-//     const updatedQuiz = await Quiz.updateOne({_id: quizID}, {$push: {"questions": {_id: questionID}}})
-//     if (updatedQuiz) {
-//       Question.findById(req.params.questionID).then(foundQestion => {
-//         res.json(foundQestion)
-//       })
-//     }
-//   } catch (err) {
-//     res.status(500).json({
-//       message: err.message
-//     })
-//   }
-// }
