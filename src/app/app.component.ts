@@ -71,4 +71,11 @@ export class AppComponent implements OnInit{
       )
   }
 
+  deleteQuestion() {
+    this.questionsService.deleteQuestion('644456ad537d789639099279').subscribe({
+      next: (data) => console.log('removed question', data), 
+      error: (err) => console.error(err)
+    })
+  }
+
 }
