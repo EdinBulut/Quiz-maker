@@ -1,0 +1,27 @@
+ul {
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--primary-2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+li {
+  list-style: none;
+  transition: all ease .3s;
+  cursor: pointer;
+  padding: 8px 16px;
+  .primary-icon {
+    visibility: hidden;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid var(--primary-2);
+  }
+  &:hover {
+    background: var(--primary-2);
+    .primary-icon {
+        visibility: visible;
+    }
+  }
+}
