@@ -39,6 +39,7 @@
               "src/styles/colors.scss",
               "src/styles/animations.scss",
               "src/styles/lists.scss",
+              "src/styles/forms.scss",
               "src/styles/overrides.scss"
             ],
             "scripts": []
@@ -118,6 +119,8 @@
               "src/styles/colors.scss",
               "src/styles/animations.scss",
               "src/styles/lists.scss",
+              "src/styles/forms.scss",
+
               "src/styles/overrides.scss"
             ],
             "scripts": []
