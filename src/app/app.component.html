@@ -1,4 +1,9 @@
-<ng-container *ngIf="(questions$ | async) as questions; else loadingQuestions">
+<app-header></app-header>
+<router-outlet></router-outlet>
+
+
+
+<!-- <ng-container *ngIf="(questions$ | async) as questions; else loadingQuestions">
 
   <div *ngFor="let question of questions">
       {{question.question}} : {{question.answer}}
@@ -19,4 +24,4 @@
 </ng-container>
 <ng-template #loadingQuestions>
   loading..
-</ng-template>
+</ng-template> -->
