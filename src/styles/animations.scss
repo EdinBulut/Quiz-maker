@@ -1,0 +1,137 @@
+@keyframes hidden-to-visible {
+  0% {
+    opacity: 0;
+  }
+
+  25% {}
+
+  50% {}
+
+  75% {}
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+@keyframes bottom-to-top {
+  0% {
+    transform: translateY(100vh);
+  }
+
+  100% {
+    transform: translateY(0vh);
+  }
+}
+
+
+@keyframes top-to-bottom {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+
+@keyframes up-down {
+  0% {
+    transform: translateY(0px);
+    background-color: var(--goods-primary-05);
+  }
+
+  25% {
+    transform: translateY(2.5px);
+    background-color: var(--goods-primary-04);
+  }
+
+  50% {
+    transform: translateY(5px);
+    background-color: var(--goods-primary-03);
+  }
+
+  75% {
+    transform: translateY(2.5px);
+    background-color: var(--goods-primary-04);
+  }
+
+  100% {
+    transform: translateY(0px);
+    background-color: var(--goods-primary-05);
+  }
+}
+
+
+@keyframes transparent-to-opake-bkg {
+  0% {
+    background-color: transparent;
+  }
+
+  100% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+
+@keyframes opake-to-transparent-bkg {
+  0% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: var(--goods-primary-03);
+  }
+
+  100% {
+    background-color: var(--goods-primary-04);
+  }
+}
+
+
+@keyframes v-size-from-zero-to-max {
+  0% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 90vh;
+  }
+}
+
+
+@keyframes snackbar-position {
+  0% {
+    top: -200px;
+  }
+
+  0% {
+    top: 24px;
+  }
+
+  100% {
+    top: -200px;
+  }
+}
+
+
+@keyframes placeHolder-shimmer {
+  0% {
+    background-position: -460px 0
+  }
+
+  100% {
+    background-position: 460px 0
+  }
+}
+
