@@ -4,6 +4,8 @@ const Question = require('../../models/question');
 const Quiz = require('../../models/quiz');
 
 
+
+
 router.get('/', (req, res) => {
   Question.find()
     .then(questions => {
@@ -12,11 +14,39 @@ router.get('/', (req, res) => {
     .catch(err => console.log(err.message))
 })
 
+
+
+
+
+router.get('/search/:searchValue', (req, res) => {
+  const searchValue = req.params.searchValue.toLowerCase()
+  Question.find(
+    {
+      $or: [
+        {question: { $regex: new RegExp(searchValue, "i") }},
+        {answer: { $regex: new RegExp(searchValue, "i") }}
+      ] 
+    }
+    )
+    .then(questions => {
+      res.json(questions);
+    })
+    .catch(err => console.log(err))
+})
+
+
+
+
+
 router.get('/:id', (req, res) => {
   Question.findById(req.params.id)
     .then(question => res.json(question))
     .catch(err => console.log(err.message))
 })
+
+
+
+
 
 router.post('/', (req, res) => {
   const questionData = req.body;
@@ -28,6 +58,10 @@ router.post('/', (req, res) => {
     }))
 
 })
+
+
+
+
 
 router.put('/:id', async (req, res) => {
   const body = req.body
@@ -79,5 +113,8 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+
+
 
 module.exports = router;

@@ -15,8 +15,15 @@ export class QuestionsService {
   constructor(private http: HttpClient) { }
 
 
-  getQuestions(): Observable<Question[]> {
-    return this.http.get<Question[]>(this.questionsUrl);
+  getQuestions(searchValue?: string): Observable<Question[]> {
+    const url = searchValue ? `${this.questionsUrl}/search/${searchValue}` : this.questionsUrl 
+    return this.http.get<Question[]>(url);
+  }
+
+
+  searchQuestions(searchValue: string): Observable<Question> {
+    const url = `${this.questionsUrl}/search/${searchValue}`;
+    return this.http.get<Question>(url);
   }
 
 
@@ -25,9 +32,9 @@ export class QuestionsService {
   }
 
 
-  deleteQuestion(questionID: string): Observable<any> {
+  deleteQuestion(questionID: string): Observable<Question> {
     const url = `${this.questionsUrl}/${questionID}`;
-    return this.http.delete<any>(url, this.httpOptions);
+    return this.http.delete<Question>(url, this.httpOptions);
   }
 
 }
