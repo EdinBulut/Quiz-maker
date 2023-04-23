@@ -1,0 +1,65 @@
+.action-button {
+  color: var(--primary-1);
+  background: var(--main-background);
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  gap: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+  position: relative;
+  flex-grow: 1;
+
+  p,
+  span {
+    cursor: pointer;
+    align-self: unset;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  font-weight: 600;
+  padding: 0 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all ease .3s;
+  min-height: 40px;
+  height: 40px;
+}
+
+.action-button:disabled,
+.action-button[disabled] {
+  cursor: default;
+  .icon-24,
+  .icon-20,
+  p,
+  span {
+    cursor: default;
+  }
+}
+
+
+.primary-button {
+  border: none;
+  background: var(--primary-3);
+  color: var(--main-background);
+
+  .icon-20,
+  .icon-24 {
+    background-color: var(--main-background);
+  }
+
+  &:hover {
+    color: var(--main-background);
+    background: var(--primary-4);
+  }
+}
+
+
+.primary-button:disabled,
+.primary-button[disabled] {
+  background-color: var(--primary-1);
+}
