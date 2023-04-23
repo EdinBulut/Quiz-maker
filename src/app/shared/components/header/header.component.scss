@@ -1,0 +1,15 @@
+.header-wrapper {
+    height: 80px;
+    position: sticky;
+    top: 0;
+    box-sizing: border-box;
+    display: flex;
+    padding: 0 40px 0 56px;
+    border-bottom: 1px solid var(--primary-2);
+    background: var(--main-background);
+    z-index: 100;
+  
+    h2 {
+      align-self: center;
+    }
+  }
