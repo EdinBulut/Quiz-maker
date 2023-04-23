@@ -43,3 +43,65 @@
 .fw-400 {
   font-weight: 400 !important;
 }
+
+.mat-body p,
+.mat-body-1 p,
+.mat-typography p,
+.mat-body,
+h1, .mat-body-1, .mat-typography, .mat-h1, .mat-headline, .mat-typography h1,
+h2, .mat-h2, .mat-title, .mat-typography h2, .mat-subheading-2,
+h3, .mat-h3, .mat-typography h3 {
+  margin: 0;
+}
+
+span {
+  font-size: 10px;
+  line-height: 16px;
+}
+
+
+h1,
+.mat-h1,
+.mat-h1,
+.mat-headline,
+.mat-typography h1 {
+  font-size: 32px;
+  line-height: 48px;
+}
+
+h2,
+.mat-h2,
+.mat-title,
+.mat-typography h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+
+h3,
+.mat-h3,
+.mat-subheading-2,
+.mat-typography h3 {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+h4,
+.mat-h4,
+.mat-subheading-1,
+.mat-typography .mat-h4,
+.mat-typography .mat-subheading-1,
+.mat-typography h4 {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 600;
+  color: var(--goods-white);
+  margin: 0;
+}
+
+.mat-body p.p-sm, .mat-body span.p-sm,
+.mat-body-1 p.p-sm, .mat-body span.p-sm,
+.mat-typography p.p-sm, .mat-typography span.p-sm {
+  font-size: 12px;
+  line-height: 18px;
+}
