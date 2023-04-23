@@ -5,6 +5,10 @@
         <div class="plus-icon icon-16"></div><p>Create new quiz</p>
     </button>
     <ng-container *ngIf="quizzes.length else noQuizzesContainer">
+      <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
+        <div class="icon-20 search-icon prefix"></div>
+        <input type="text" placeholder="Search for quiz" (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
+      </div>
         <ul>
             <li *ngFor="let quiz of quizzes">
                 <div class="d-flex jc-between gap-12">
