@@ -4,13 +4,22 @@
 
 
     --primary-1: #0a3d62;
-    --primary-2: #3c6382;
+    --primary-2: #223c50;
     --primary-3: #60a3bc;
     --primary-4: #82ccdd;
     --primary-text-1: #0a3d62;
-    --primary-text-2: #3c6382;
+    --primary-text-2: #223c50;
     --primary-text-3: #60a3bc;
     --primary-text-4: #82ccdd;
+
+    --secondary-1: #079992;
+    --secondary-2: #38ada9;
+    --secondary-3: #78e08f;
+    --secondary-4: #b8e994;
+    --secondary-text-1: #079992;
+    --secondary-text-2: #38ada9;
+    --secondary-text-3: #78e08f;
+    --secondary-text-4: #b8e994;
 
     --neutral-1: #434141;
     --neutral-2: #757373;
@@ -29,10 +38,14 @@
 
     --danger-1: #590202;
     --danger-2: #850202;
-    --danger-3: #b00505;
+    --danger-3: #ae0c0c;
     --danger-4: #db6262;
 
 
     --white: #FFF;
     --black: #202020;
+}
+
+.secondary-text {
+    color: var(--secondary-text-1);
 }
