@@ -17,6 +17,14 @@
   margin: 0;
 }
 
+.icon-20 {
+  cursor: pointer;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  position: relative;
+  margin: 0;
+}
 
 .icon-24 {
   cursor: pointer;
@@ -56,6 +64,9 @@
 
 .primary-icon {
   background-color: var(--primary-3);
+  &:hover {
+    background-color: var(--primary-4);
+  }
 }
 
 .white-icon {
@@ -76,4 +87,14 @@
 .quiz-icon {
   -webkit-mask: url('~src/assets/images/svg/quiz-icon.svg') no-repeat;
   mask: url('~src/assets/images/svg/quiz-icon.svg') no-repeat;
+}
+
+.play-icon {
+  -webkit-mask: url('~src/assets/images/svg/play-icon.svg') no-repeat;
+  mask: url('~src/assets/images/svg/play-icon.svg') no-repeat;
+}
+
+.pencil-icon {
+  -webkit-mask: url('~src/assets/images/svg/pencil-icon.svg') no-repeat;
+  mask: url('~src/assets/images/svg/pencil-icon.svg') no-repeat;
 }
