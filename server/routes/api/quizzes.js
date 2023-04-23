@@ -21,12 +21,9 @@ router.get('/', (req, res) => {
 
 
 
-router.get('/search/:search', (req, res) => {
-  const search = req.params.search.toLowerCase()
-  Quiz.aggregate([
-    {$project:{lowerCaseName: { $toLower: "$name" }, name: "$name", questions: "$questions", _id: '$_id'}},
-    {$match: {lowerCaseName: {$regex: search}}  }
-    ])
+router.get('/search/:searchValue', (req, res) => {
+  const searchValue = req.params.searchValue.toLowerCase()
+  Quiz.find({name: { $regex: new RegExp(searchValue, "i") }}).populate("questions")
     .then(quizzes => {
       res.json(quizzes);
     })

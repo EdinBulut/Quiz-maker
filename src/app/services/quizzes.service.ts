@@ -28,8 +28,8 @@ export class QuizzesService {
   }
 
 
-  searchQuizzes(search: string): Observable<Quiz> {
-    const url = `${this.quizzesUrl}/search/${search}`;
+  searchQuizzes(searchValue: string): Observable<Quiz> {
+    const url = `${this.quizzesUrl}/search/${searchValue}`;
     return this.http.get<Quiz>(url);
   }
   //GET END
