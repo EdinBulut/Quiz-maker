@@ -1,22 +1,40 @@
-<div class="quizzes-container d-flex jc-center">
+<div class="quizzes-container d-flex fd-column jc-center">
   <ng-container *ngIf="(quizzes$ | async) as quizzes; else loadingQuizzes">
-    <ul>
-      <li *ngFor="let quiz of quizzes">
-        <div class="d-flex jc-between gap-12">
-            <div class="d-flex fd-column gap-4">
-              <h2>{{quiz.name}}</h2>
-              <p class="secondary-text">{{quiz.questions.length}} questions</p>
-            </div>
-            <div class="d-flex jc-center ai-center gap-12">
-                <div class="primary-icon play-icon icon-16"></div>
-                <div class="danger-icon trash-icon icon-16"></div>
-            </div>
+    <ng-container *ngIf="quizzes.length else noQuizzesContainer">
+        <ul>
+            <li *ngFor="let quiz of quizzes">
+                <div class="d-flex jc-between gap-12">
+                    <div class="d-flex fd-column gap-4">
+                        <h2>{{quiz.name}}</h2>
+                        <p class="secondary-text">{{quiz.questions.length}} {{quiz.questions.length > 1 ? 'questions' : 'question'}}</p>
+                    </div>
+                    <div class="d-flex jc-center ai-center gap-12">
+                        <div class="primary-icon play-icon icon-16"></div>
+                        <div class="danger-icon trash-icon icon-16"></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </ng-container>
+    <ng-template #noQuizzesContainer>
+        <div class="d-flex fd-column ai-center gap-4">
+            <h2>There are no quizzes created</h2>
+            <p class="neutral-text">Create one</p>
+        </div>
+    </ng-template>
+    
 
+  </ng-container>
+  <ng-template #loadingQuizzes>
+    <ul>
+      <li *ngFor="let quiz of skeletonLoaderData">
+        <div class="d-flex jc-between gap-12">
+          <div class="d-flex fd-column gap-4">
+            <h2 class="loading-block">{{quiz.title}}</h2>
+            <p class="secondary-text loading-block">questions: xx</p>
+          </div>
         </div>
       </li>
     </ul>
-  </ng-container>
-  <ng-template #loadingQuizzes>
-
   </ng-template>
 </div>

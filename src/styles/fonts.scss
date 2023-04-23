@@ -103,3 +103,48 @@ h4,
   font-size: 12px;
   line-height: 18px;
 }
+
+.loading-block {
+  width: fit-content !important;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #1F2937 0%, #60a3bc 50%, #1F2937 100%);
+  background-size: 980px 898px;
+  animation: placeholder-shimmer 1.7s linear infinite;
+  color: transparent !important;
+  span, p, h1, h2, h3, h4, h5, h6 {
+    color: transparent;
+    &:hover {
+      color: transparent !important;
+    }
+  }
+}
+
+h1.loading-block {
+  height: 32px;
+  margin: 8px 0;
+}
+
+h2.loading-block {
+  height: 24px;
+  margin: 6px 0;
+}
+
+h3.loading-block {
+  height: 18px;
+  margin: 3px 0;
+}
+
+p.loading-block {
+  height: 14px;
+  margin: 4px 0;
+}
+
+p.p-sm.loading-block {
+  height: 12px;
+  margin: 3px 0;
+}
+
+span.loading-block {
+  height: 10px;
+  margin: 3px 0;
+}

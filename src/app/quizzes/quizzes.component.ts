@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { Quiz } from './models/quiz-model';
 import { QuizzesService } from './services/quizzes.service';
+import { skeletonLoaderData } from '../shared/constants/skeleton.constants';
 
 @Component({
   selector: 'app-quizzes',
@@ -10,6 +11,7 @@ import { QuizzesService } from './services/quizzes.service';
 })
 export class QuizzesComponent implements OnInit {
   quizzes$!: Observable<Quiz[]>
+  skeletonLoaderData = skeletonLoaderData
 
   constructor(
     private quizzesService: QuizzesService
