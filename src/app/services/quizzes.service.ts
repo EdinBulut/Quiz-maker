@@ -17,8 +17,9 @@ export class QuizzesService {
   constructor(private http: HttpClient) { }
 
   //GET START
-  getQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.quizzesUrl);
+  getQuizzes(searchValue?: string): Observable<Quiz[]> {
+    const url = searchValue ? `${this.quizzesUrl}/search/${searchValue}` : this.quizzesUrl 
+    return this.http.get<Quiz[]>(url);
   }
 
 
