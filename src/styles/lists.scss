@@ -11,7 +11,7 @@ li {
   transition: all ease .3s;
   cursor: pointer;
   padding: 8px 16px;
-  .primary-icon {
+  .primary-icon, .danger-icon {
     visibility: hidden;
   }
 
@@ -20,8 +20,11 @@ li {
   }
   &:hover {
     background: var(--primary-2);
-    .primary-icon {
+    .primary-icon, .danger-icon {
         visibility: visible;
+    }
+    .secondary-text {
+        color: var(--secondary-text-3);
     }
   }
 }
