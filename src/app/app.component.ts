@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionsService } from './services/questions.service';
+import { QuestionsService } from './questions/services/questions.service';
 import { Observable, tap } from 'rxjs';
-import { Question } from './models/question-model';
+import { Question } from './questions/models/question-model';
 import { } from 'rxjs/operators'
-import { QuizzesService } from './services/quizzes.service';
-import { Quiz } from './models/quiz-model';
+import { QuizzesService } from './quizzes/services/quizzes.service';
+import { Quiz } from './quizzes/models/quiz-model';
 
 
 @Component({
