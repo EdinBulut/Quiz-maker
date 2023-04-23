@@ -16,6 +16,7 @@ export class QuizzesService {
 
   constructor(private http: HttpClient) { }
 
+
   //GET START
   getQuizzes(searchValue?: string): Observable<Quiz[]> {
     const url = searchValue ? `${this.quizzesUrl}/search/${searchValue}` : this.quizzesUrl 
@@ -34,6 +35,9 @@ export class QuizzesService {
     return this.http.get<Quiz>(url);
   }
   //GET END
+
+
+
 
 
   //UPDATE START
@@ -56,13 +60,25 @@ export class QuizzesService {
   //UPDATE END
 
 
+
+
+
   //CREATE START
   createQuiz(quiz: { name: string, questionIDs: string[] }): Observable<any> {
     return this.http.post<any>(this.quizzesUrl, quiz, this.httpOptions);
   }
   //CREATE END
+  
 
 
+  
+
+  //DELETE START
+  deleteQuiz(questionID: string): Observable<Quiz> {
+    const url = `${this.quizzesUrl}/${questionID}`;
+    return this.http.delete<Quiz>(url, this.httpOptions);
+  }
+  //DELETE END
 
 
 }
