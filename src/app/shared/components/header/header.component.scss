@@ -1,15 +1,27 @@
-.header-wrapper {
-    height: 80px;
-    position: sticky;
-    top: 0;
-    box-sizing: border-box;
-    display: flex;
-    padding: 0 40px 0 56px;
-    border-bottom: 1px solid var(--primary-2);
-    background: var(--main-background);
-    z-index: 100;
-  
-    h2 {
-      align-self: center;
+.header-container {
+  height: 80px;
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
+  display: flex;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--primary-2);
+  background: var(--main-background);
+  z-index: 100;
+}
+
+.title-wrapper {
+  &:hover {
+    h1 {
+    color: var(--primary-text-4);
+    }
+    .primary-icon {
+      background: var(--primary-4);
     }
   }
+}
+
+h1, .primary-icon {
+  cursor: pointer;
+  transition: all ease .3s;
+}
