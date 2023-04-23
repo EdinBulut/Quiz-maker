@@ -63,9 +63,9 @@
 }
 
 .primary-icon {
-  background-color: var(--primary-3);
+  background: var(--primary-3);
   &:hover {
-    background-color: var(--primary-4);
+    background: var(--primary-4);
   }
 }
 
@@ -73,8 +73,11 @@
   background-color: var(--white);
 }
 
-.error-icon {
-  background: var(--error-4) !important;
+.danger-icon {
+  background: var(--danger-3);
+  &:hover {
+    background: var(--danger-4);
+  }
 }
 
 .disabled-icon {
@@ -97,4 +100,9 @@
 .pencil-icon {
   -webkit-mask: url('~src/assets/images/svg/pencil-icon.svg') no-repeat;
   mask: url('~src/assets/images/svg/pencil-icon.svg') no-repeat;
+}
+
+.trash-icon {
+  -webkit-mask: url('~src/assets/images/svg/trash-icon.svg') no-repeat;
+  mask: url('~src/assets/images/svg/trash-icon.svg') no-repeat;
 }
