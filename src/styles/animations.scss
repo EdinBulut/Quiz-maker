@@ -41,27 +41,27 @@
 @keyframes up-down {
   0% {
     transform: translateY(0px);
-    background-color: var(--goods-primary-05);
+    background-color: var(--primary-4);
   }
 
   25% {
     transform: translateY(2.5px);
-    background-color: var(--goods-primary-04);
+    background-color: var(--primary-3);
   }
 
   50% {
     transform: translateY(5px);
-    background-color: var(--goods-primary-03);
+    background-color: var(--primary-2);
   }
 
   75% {
     transform: translateY(2.5px);
-    background-color: var(--goods-primary-04);
+    background-color: var(--primary-3);
   }
 
   100% {
     transform: translateY(0px);
-    background-color: var(--goods-primary-05);
+    background-color: var(--primary-4);
   }
 }
 
@@ -90,11 +90,11 @@
 
 @keyframes skeleton-loading {
   0% {
-    background-color: var(--goods-primary-03);
+    background-color: var(--primary-3);
   }
 
   100% {
-    background-color: var(--goods-primary-04);
+    background-color: var(--primary-4);
   }
 }
 
