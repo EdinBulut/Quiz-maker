@@ -38,7 +38,8 @@
               "src/styles/buttons.scss",
               "src/styles/colors.scss",
               "src/styles/animations.scss",
-              "src/styles/lists.scss" 
+              "src/styles/lists.scss",
+              "src/styles/overrides.scss"
             ],
             "scripts": []
           },
@@ -116,7 +117,8 @@
               "src/styles/buttons.scss",
               "src/styles/colors.scss",
               "src/styles/animations.scss",
-              "src/styles/lists.scss" 
+              "src/styles/lists.scss",
+              "src/styles/overrides.scss"
             ],
             "scripts": []
           }
