@@ -10,6 +10,7 @@ import { skeletonLoaderData } from '../shared/constants/skeleton.constants';
   styleUrls: ['./quizzes.component.scss']
 })
 export class QuizzesComponent implements OnInit {
+  isProcessing = false
   quizzes$!: Observable<Quiz[]>
   skeletonLoaderData = skeletonLoaderData
 

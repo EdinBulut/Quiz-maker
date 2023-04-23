@@ -1,5 +1,9 @@
-<div class="quizzes-container d-flex fd-column jc-center">
+<mat-progress-bar mode="indeterminate" *ngIf="isProcessing"></mat-progress-bar>
+<div class="quizzes-container d-flex fd-column jc-center gap-16">
   <ng-container *ngIf="(quizzes$ | async) as quizzes; else loadingQuizzes">
+    <button class="action-button primary-button" matRipple (click)="isProcessing = !isProcessing">
+        <div class="plus-icon icon-16"></div><p>Create new quiz</p>
+    </button>
     <ng-container *ngIf="quizzes.length else noQuizzesContainer">
         <ul>
             <li *ngFor="let quiz of quizzes">
