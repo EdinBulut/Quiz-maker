@@ -9,9 +9,12 @@
   </ng-container>
   
   <button (click)="createQuiz()">Create quiz</button>
-  <button (click)="insertQuestionIntoQuiz()">Insert question</button>
-  <button (click)="removeQuestionFromQuiz()">Remove question from quiz</button>
+  <button (click)="deleteQuiz()">Delete quiz</button>
   <button (click)="updateQuiz()">Update quiz</button>
+  <br>
+  <button (click)="insertQuestionIntoQuiz()">Insert question into quiz</button>
+  <button (click)="removeQuestionFromQuiz()">Remove question from quiz</button>
+  <br>
   <button (click)="deleteQuestion()">Delete question</button>
 </ng-container>
 <ng-template #loadingQuestions>

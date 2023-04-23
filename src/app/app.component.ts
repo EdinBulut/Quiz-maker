@@ -78,4 +78,12 @@ export class AppComponent implements OnInit{
     })
   }
 
+
+  deleteQuiz() {
+    this.quizzesService.deleteQuiz('64447f7fa3bd8d11efa65eed').subscribe({
+      next: (data) => console.log('removed question', data), 
+      error: (err) => console.error(err)
+    })
+  }
+
 }
