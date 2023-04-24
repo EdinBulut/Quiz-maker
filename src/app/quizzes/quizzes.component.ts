@@ -20,6 +20,7 @@ export class QuizzesComponent implements OnInit {
   quizzes$!: Observable<Quiz[]>
   skeletonLoaderData = skeletonLoaderData
   isSearchInFocus = false
+  searchValue = ''
 
   constructor(
     private quizzesService: QuizzesService,

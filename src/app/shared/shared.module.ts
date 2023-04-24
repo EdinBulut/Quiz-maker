@@ -6,6 +6,9 @@ import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/conf
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { HighlightTextPipe } from './pipes/highlight-text.pipe';
+import { FilterByKeyPipe } from './pipes/filter-by-key.pipe';
 
 
 const materialModules = [
@@ -19,16 +22,22 @@ const materialModules = [
 @NgModule({
   declarations: [
     ConfirmDialogComponent,
+    HighlightTextPipe,
+    FilterByKeyPipe,
   ],
   imports: [
+    materialModules,
     CommonModule,
-    materialModules
+    FormsModule
   ],
 
   exports: [
-    CommonModule,
     materialModules,
-    ConfirmDialogComponent
+    CommonModule,
+    FormsModule,
+    ConfirmDialogComponent,
+    HighlightTextPipe,
+    FilterByKeyPipe,
   ]
 })
 

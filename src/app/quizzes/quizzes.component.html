@@ -10,13 +10,14 @@
       
       <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus" *ngIf="quizzes.length">
         <div class="icon-20 search-icon prefix"></div>
-        <input type="text" placeholder="Search for quiz" (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
+        <input type="text" placeholder="Search for quiz" [(ngModel)]="searchValue"
+        (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
       </div>
     </div>
 
     <ng-container *ngIf="quizzes.length else noQuizzesContainer">
-      <ul>
-        <li *ngFor="let quiz of quizzes">
+      <ul *ngIf="(quizzes | filterByKey : searchValue : 'name').length else noSearchResults">
+        <li *ngFor="let quiz of (quizzes | filterByKey : searchValue : 'name')">
           <div class="d-flex jc-between gap-12">
             <div class="d-flex fd-column gap-4">
               <h2>{{quiz.name}}</h2>
@@ -30,6 +31,10 @@
           </div>
         </li>
       </ul>
+      <ng-template #noSearchResults>
+        <p class="ta-center">There are no results for search <strong>"{{searchValue}}"</strong></p>
+      </ng-template>
+      
     </ng-container>
 
     <ng-template #noQuizzesContainer>
