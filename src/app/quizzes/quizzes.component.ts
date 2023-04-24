@@ -8,7 +8,7 @@ import { ConfirmDialogComponent } from '../shared/components/dialogs/confirm-dia
 import { DialogVariables } from '../shared/models/dialog-variables.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quizzes',
@@ -26,7 +26,8 @@ export class QuizzesComponent implements OnInit {
     private quizzesService: QuizzesService,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
 
@@ -67,8 +68,8 @@ export class QuizzesComponent implements OnInit {
 
   onDeleteQuizConfirmed(quizID: string) {
     this.isProcessing = true
-    this.quizzesService.deleteQuiz(quizID).subscribe(
-      quiz => {
+    this.quizzesService.deleteQuiz(quizID).subscribe({
+      next: quiz => {
         this.quizzes$ = this.quizzes$.pipe(
           map(quizzes => quizzes.filter(q => q._id !== quiz._id)),
           tap(() => {
@@ -82,8 +83,8 @@ export class QuizzesComponent implements OnInit {
           })
         )
       },
-      err => console.log(err)
-      )
+      error: err => console.log(err)
+      })
   }
   
 
