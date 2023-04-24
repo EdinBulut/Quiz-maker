@@ -2,7 +2,7 @@
 <div class="quizzes-container d-flex fd-column jc-center gap-16">
   <ng-container *ngIf="(quizzes$ | async) as quizzes; else loadingQuizzes">
     <button class="action-button primary-button" matRipple (click)="isProcessing = !isProcessing">
-        <div class="plus-icon icon-16"></div><p>Create new quiz</p>
+        <div class="plus-icon action-icon icon-16"></div><p>Create new quiz</p>
     </button>
     <ng-container *ngIf="quizzes.length else noQuizzesContainer">
       <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="d-flex jc-center ai-center gap-12">
                         <div class="primary-icon play-icon icon-16"></div>
-                        <div class="danger-icon trash-icon icon-16"></div>
+                        <div class="danger-icon trash-icon icon-16" (click)="deleteQuiz(quiz)"></div>
                     </div>
                 </div>
             </li>
