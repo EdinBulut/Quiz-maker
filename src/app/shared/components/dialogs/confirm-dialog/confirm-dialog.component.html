@@ -5,8 +5,8 @@
       <div class="d-flex fd-column gap-32">
         <div class="d-flex fd-column gap-16">
           <h2 class='ta-center dialog-title'>{{dialogVariables.title}}</h2>
-          <p [class.ta-center]="dialogVariables.message.isCentered" 
-            innerHTML="{{dialogVariables.message.text}}">
+          <p [class.ta-center]="dialogVariables.message?.isCentered" 
+            innerHTML="{{dialogVariables.message?.text}}">
           </p>
           <p *ngIf="dialogVariables?.note?.text" [class.ta-center]="dialogVariables.note?.isCentered">
             {{dialogVariables.note?.text}}
