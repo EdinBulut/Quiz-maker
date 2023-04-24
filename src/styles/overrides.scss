@@ -10,3 +10,11 @@
 .mat-mdc-dialog-surface, .mdc-dialog__surface {
   background: transparent !important;
 }
+
+.cdk-global-scrollblock {
+  top: 0 !important
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  text-align: center;
+}
