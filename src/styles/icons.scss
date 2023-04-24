@@ -80,8 +80,12 @@
   }
 }
 
+.action-icon {
+  background: var(--main-background);
+}
+
 .disabled-icon {
-  background: var(--neutral-4) !important;
+  background: var(--neutral-4);
   cursor: default;
   pointer-events: none;
 }
@@ -115,4 +119,9 @@
 .search-icon {
   -webkit-mask: url('~src/assets/images/svg/search-icon.svg') no-repeat;
   mask: url('~src/assets/images/svg/search-icon.svg') no-repeat;
+}
+
+.x-in-circle-icon {
+  -webkit-mask: url('~src/assets/images/svg/x-in-circle-icon.svg') no-repeat;
+  mask: url('~src/assets/images/svg/x-in-circle-icon.svg') no-repeat;
 }
