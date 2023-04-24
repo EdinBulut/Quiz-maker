@@ -5,12 +5,15 @@ import { MatCardModule } from '@angular/material/card';
 import { ConfirmDialogComponent } from './components/dialogs/confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 const materialModules = [
   MatProgressBarModule,
   MatRippleModule,
   MatCardModule,
   MatDialogModule,
+  MatSnackBarModule
 ]
 
 @NgModule({
