@@ -11,7 +11,7 @@ import { Quiz } from '../models/quiz-model';
 export class QuizzesService {
 
   // private quizzesUrl = '/questions';
-  private quizzesUrl = 'http://localhost:3000/quizzes';
+  private quizzesUrl = 'http://localhost:3000/api/quizzes';
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(private http: HttpClient) { }

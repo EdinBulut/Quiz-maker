@@ -23,8 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use(cors()); // should be removed later
-app.use('/questions', questionsAPI);
-app.use('/quizzes', quizzesAPI);
+app.use('/api/questions', questionsAPI);
+app.use('/api/quizzes', quizzesAPI);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/quiz-maker/index.html'));

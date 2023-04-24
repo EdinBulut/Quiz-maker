@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class QuestionsService {
 
   // private questionsUrl = '/questions';
-  private questionsUrl = 'http://localhost:3000/questions';
+  private questionsUrl = 'http://localhost:3000/api/questions';
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
   constructor(private http: HttpClient) { }
