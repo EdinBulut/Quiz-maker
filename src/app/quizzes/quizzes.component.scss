@@ -1,5 +1,5 @@
 .quizzes-container {
-  padding: 40px 24px;
+  padding: 0 24px 40px;
   max-width: 680px;
   margin: auto;
 }
@@ -8,4 +8,17 @@ ul {
   width: 100%;
   align-self: center;
   flex: 1;
+}
+
+.quizzes-actions-wrapper {
+  padding-top: 40px;
+  padding-bottom: 8px;
+
+  position: sticky;
+  top: 60px;
+  background: var(--main-background);
+  z-index: 10;
+  box-sizing: content-box;
+  width: calc(100% + 2px) !important;
+  margin-left: -1px;
 }
