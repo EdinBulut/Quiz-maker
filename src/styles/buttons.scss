@@ -32,9 +32,8 @@
 .action-button:disabled,
 .action-button[disabled] {
   cursor: default;
-  .icon-24,
-  .icon-20,
-  .icon-16,
+
+  .action-icon,
   p,
   span {
     cursor: default;
@@ -47,12 +46,6 @@
   background: var(--primary-3);
   color: var(--main-background);
 
-  .icon-16,
-  .icon-20,
-  .icon-24 {
-    background-color: var(--main-background);
-  }
-
   &:hover {
     color: var(--main-background);
     background: var(--primary-4);
@@ -63,4 +56,22 @@
 .primary-button:disabled,
 .primary-button[disabled] {
   background-color: var(--primary-1);
+}
+
+
+.primary-stroked-button {
+  border: 1px solid var(--primary-3);
+  background-color: transparent;
+  color: var(--primary-3);
+
+  &:hover {
+    color: var(--main-background);
+    background: var(--primary-4);
+  }
+}
+
+.primary-stroked-button:disabled, .primary-stroked-button[disabled] {
+  background-color: var(--main-background);
+  color: var(--primary-1);
+  border: 1px solid var(--primary-1);
 }
