@@ -1,0 +1,38 @@
+.mat-mdc-card {
+  max-width: 640px;
+  margin: 16px;
+  min-height: fit-content;
+  border-radius: 8px;
+  background: var(--primary-1);
+  border: 1px solid var(--primary-3);
+  color: var(--white);
+  z-index: 2;
+}
+
+
+.mat-mdc-card-content {
+  &:last-child, &:first-child {
+    box-shadow: none;
+    padding: 32px;
+  }
+}
+
+.dialog-background {
+  background: rgba(0, 0, 0, 0.212);
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: hidden-to-visible 2s forwards;
+}
+
+.x-in-circle-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  &:hover {
+    background: var(--primary-4);
+  }
+}
