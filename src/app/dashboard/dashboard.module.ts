@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuestionsComponent } from './questions/questions.component';
-import { CreateUpdateQuizDialogComponent } from './quizzes/dialogs/create-update-quiz-dialog/create-update-quiz-dialog.component';
+import { CrudQuizDialogComponent } from './quizzes/dialogs/create-update-quiz-dialog/crud-quiz-dialog.component';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import { CreateUpdateQuizDialogComponent } from './quizzes/dialogs/create-update
     DashboardComponent,
     QuizzesComponent,
     QuestionsComponent,
-    CreateUpdateQuizDialogComponent
+    CrudQuizDialogComponent
   ],
   imports: [
     DashboardRoutingModule,

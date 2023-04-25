@@ -3,3 +3,8 @@
    flex: 1;
    max-width: 800px;
 }
+
+
+.mat-mdc-card-content, .mat-mdc-card-content:first-of-type {
+    padding-top: 16px;
+}

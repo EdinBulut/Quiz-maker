@@ -9,7 +9,7 @@ import { DialogVariables } from '../../shared/models/dialog-variables.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
-import { CreateUpdateQuizDialogComponent } from './dialogs/create-update-quiz-dialog/create-update-quiz-dialog.component';
+import { CrudQuizDialogComponent } from './dialogs/create-update-quiz-dialog/crud-quiz-dialog.component';
 import { Crud } from 'src/app/shared/models/crud.enum';
 
 @Component({
@@ -53,7 +53,7 @@ export class QuizzesComponent implements OnInit {
 
 
   createQuiz() {
-    const dialogRef = this.dialog.open(CreateUpdateQuizDialogComponent, this.crudDialogSettings(Crud.CREATE))
+    const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.crudDialogSettings(Crud.CREATE))
   }
 
 
@@ -73,7 +73,7 @@ export class QuizzesComponent implements OnInit {
 
 
   updateQuiz(quiz: Quiz) {
-    const dialogRef = this.dialog.open(CreateUpdateQuizDialogComponent, this.crudDialogSettings(Crud.UPDATE, quiz))
+    const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.crudDialogSettings(Crud.UPDATE, quiz))
   }
 
 

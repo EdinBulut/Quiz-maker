@@ -5,12 +5,12 @@ import { Crud } from 'src/app/shared/models/crud.enum';
 
 @Component({
   selector: 'app-create-update-quiz-dialog',
-  templateUrl: './create-update-quiz-dialog.component.html',
-  styleUrls: ['./create-update-quiz-dialog.component.scss']
+  templateUrl: './crud-quiz-dialog.component.html',
+  styleUrls: ['./crud-quiz-dialog.component.scss']
 })
 
 
-export class CreateUpdateQuizDialogComponent implements OnInit {
+export class CrudQuizDialogComponent implements OnInit {
 
   isClosed = false
   CRUD = Crud
@@ -23,7 +23,7 @@ export class CreateUpdateQuizDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public injectedData: {CRUD: Crud, quiz?: Quiz},
-    private matDialogRef: MatDialogRef<CreateUpdateQuizDialogComponent>
+    private matDialogRef: MatDialogRef<CrudQuizDialogComponent>
   ) { }
 
 
