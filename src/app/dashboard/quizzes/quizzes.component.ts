@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, delay, filter, from, map, shareReplay, take, tap, toArray } from 'rxjs';
 import { Quiz } from './models/quiz-model';
-import { QuizzesService } from './services/quizzes.service';
+import { QuizzesService } from '../../shared/API/quizAPI/quiz-api.service';
 import { skeletonLoaderData } from '../../shared/constants/skeleton.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
@@ -41,7 +41,7 @@ export class QuizzesComponent implements OnInit {
   getQuizzes() {
     this.quizzes$ = this.quizzesService.getQuizzes()
       .pipe(
-        delay(500),
+        delay(300),
         map(quizzes => quizzes.sort((q1, q2) => q1.name < q2.name ? -1 : 1)),
         tap(quizes => console.log(quizes)),
         shareReplay(1)

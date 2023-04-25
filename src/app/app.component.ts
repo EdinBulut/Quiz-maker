@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionsService } from './dashboard/questions/services/questions.service';
+import { QuestionsService } from './shared/API/questionAPI/question-api.service';
 import { Observable, tap } from 'rxjs';
 import { Question } from './dashboard/questions/models/question-model';
 import { } from 'rxjs/operators'
-import { QuizzesService } from './dashboard/quizzes/services/quizzes.service';
+import { QuizzesService } from './shared/API/quizAPI/quiz-api.service';
 import { Quiz } from './dashboard/quizzes/models/quiz-model';
 
 
