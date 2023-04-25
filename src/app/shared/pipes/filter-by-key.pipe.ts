@@ -15,7 +15,7 @@ export class FilterByKeyPipe implements PipeTransform {
         return array.filter(x => x[`${search1}`].toLowerCase().includes(inputValue) ||
         x[`${search2}`]?.toLowerCase()?.includes(inputValue))
       }
-      return array.filter(x => x[`${search1}`].toLowerCase().includes(inputValue))
+      return array.filter(x => x[`${search1}`]?.toLowerCase()?.includes(inputValue))
   }
 
 }
