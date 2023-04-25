@@ -75,3 +75,16 @@
   color: var(--primary-1);
   border: 1px solid var(--primary-1);
 }
+
+.action-button.loading-block {
+  background: linear-gradient(90deg, #1F2937 0%, #60a3bc 50%, #1F2937 100%);
+  animation: placeholder-shimmer 2s linear infinite;
+}
+
+button.loading-block {
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  min-height: 40px;
+}

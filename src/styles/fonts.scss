@@ -90,21 +90,6 @@ h4,
   line-height: 18px;
 }
 
-.loading-block {
-  width: fit-content !important;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #1F2937 0%, #60a3bc 50%, #1F2937 100%);
-  background-size: 980px 898px;
-  animation: placeholder-shimmer 1.7s linear infinite;
-  color: transparent !important;
-  span, p, h1, h2, h3, h4, h5, h6 {
-    color: transparent;
-    &:hover {
-      color: transparent !important;
-    }
-  }
-}
-
 h1.loading-block {
   height: 32px;
   margin: 8px 0;

@@ -18,3 +18,8 @@
 .mat-mdc-snack-bar-container .mdc-snackbar__label {
   text-align: center;
 }
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background: var(--primary-2) !important;
+  border: 1px solid var(--primary-3)
+}

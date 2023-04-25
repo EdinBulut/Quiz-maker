@@ -127,11 +127,11 @@
 
 @keyframes placeholder-shimmer {
   0% {
-    background-position: -460px 0
+    background-position: -900px 0
   }
 
   100% {
-    background-position: 460px 0
+    background-position: 900px 0
   }
 }
 
@@ -148,4 +148,21 @@
 
 .opake-to-transparent-bkg {
   animation: opake-to-transparent-bkg 0.3s forwards;
+}
+
+.loading-block {
+  &:not(button, .input-wrapper) {
+    width: fit-content !important;
+  }
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--main-background) 0%, var(--primary-2) 50%, var(--main-background) 100%);
+  background-size: 980px 898px;
+  animation: placeholder-shimmer 4s linear infinite;
+  color: transparent !important;
+  span, p, h1, h2, h3, h4, h5, h6 {
+    color: transparent;
+    &:hover {
+      color: transparent !important;
+    }
+  }
 }
