@@ -3,8 +3,8 @@ import { QuestionsService } from './questions/services/questions.service';
 import { Observable, tap } from 'rxjs';
 import { Question } from './questions/models/question-model';
 import { } from 'rxjs/operators'
-import { QuizzesService } from './quizzes/services/quizzes.service';
-import { Quiz } from './quizzes/models/quiz-model';
+import { QuizzesService } from './dashboard/quizzes/services/quizzes.service';
+import { Quiz } from './dashboard/quizzes/models/quiz-model';
 
 
 @Component({

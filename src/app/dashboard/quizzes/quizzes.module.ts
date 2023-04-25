@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { QuizzesRoutingModule } from './quizzes-routing.module';
 import { QuizzesComponent } from './quizzes.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
