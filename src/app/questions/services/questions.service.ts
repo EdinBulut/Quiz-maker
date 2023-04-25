@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Question } from '../models/question-model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +10,21 @@ import { Observable } from 'rxjs';
 export class QuestionsService {
 
   // private questionsUrl = '/questions';
-  private questionsUrl = 'http://localhost:3000/api/questions';
-  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+  private questionsUrl = `${environment.baseURL}/quizzes`
+  httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
 
   constructor(private http: HttpClient) { }
 
 
   getQuestions(searchValue?: string): Observable<Question[]> {
     const url = searchValue ? `${this.questionsUrl}/search/${searchValue}` : this.questionsUrl 
-    return this.http.get<Question[]>(url);
+    return this.http.get<Question[]>(url)
   }
 
 
   searchQuestions(searchValue: string): Observable<Question> {
-    const url = `${this.questionsUrl}/search/${searchValue}`;
-    return this.http.get<Question>(url);
+    const url = `${this.questionsUrl}/search/${searchValue}`
+    return this.http.get<Question>(url)
   }
 
 
@@ -33,8 +34,8 @@ export class QuestionsService {
 
 
   deleteQuestion(questionID: string): Observable<Question> {
-    const url = `${this.questionsUrl}/${questionID}`;
-    return this.http.delete<Question>(url, this.httpOptions);
+    const url = `${this.questionsUrl}/${questionID}`
+    return this.http.delete<Question>(url, this.httpOptions)
   }
 
 }
