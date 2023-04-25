@@ -9,7 +9,13 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 import { FilterByKeyPipe } from './pipes/filter-by-key.pipe';
+import { HeaderComponent } from './components/header/header.component';
 
+
+const modules = [
+  CommonModule,
+  FormsModule
+]
 
 const materialModules = [
   MatProgressBarModule,
@@ -19,25 +25,34 @@ const materialModules = [
   MatSnackBarModule
 ]
 
+
+const components = [
+  HeaderComponent,
+  ConfirmDialogComponent,
+]
+
+
+const pipes = [
+  HighlightTextPipe,
+  FilterByKeyPipe,
+]
+
+
 @NgModule({
   declarations: [
-    ConfirmDialogComponent,
-    HighlightTextPipe,
-    FilterByKeyPipe,
+    components,
+    pipes
   ],
   imports: [
+    modules,
     materialModules,
-    CommonModule,
-    FormsModule
   ],
 
   exports: [
+    modules,
     materialModules,
-    CommonModule,
-    FormsModule,
-    ConfirmDialogComponent,
-    HighlightTextPipe,
-    FilterByKeyPipe,
+    components,
+    pipes
   ]
 })
 
