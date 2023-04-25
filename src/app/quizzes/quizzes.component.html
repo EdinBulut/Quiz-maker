@@ -45,6 +45,12 @@
     </ng-template>
   </ng-container>
   <ng-template #loadingQuizzes>
+      <div class="d-flex fd-column gap-24  quizzes-actions-wrapper ">
+        <button class="loading-block" matRipple></button>
+        <div class="input-wrapper loading-block">
+          <div class="icon-20 search-icon prefix"></div>
+        </div>
+      </div>
     <ul>
       <li *ngFor="let quiz of skeletonLoaderData">
         <div class="d-flex jc-between gap-12">
