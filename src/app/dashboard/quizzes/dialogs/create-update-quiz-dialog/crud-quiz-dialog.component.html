@@ -12,10 +12,12 @@
           </ng-container>
         </h2>
 
-        <div class="input-wrapper quiz-name" [class.focused-input-wrapper]="isSearchInFocus">
-          <input type="text" placeholder="Search for quiz" [(ngModel)]="quiz.name" (focus)="isSearchInFocus=true"
-            (blur)="isSearchInFocus=false">
-        </div>
+          <div class="textarea-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
+            <textarea class="textarea"  matInput cdkTextareaAutosize matInput minlength="1"
+              required placeholder="Quiz name" [(ngModel)]="quiz.name" 
+              cdkAutosizeMinRows="1" cdkAutosizeMaxRows="7" (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
+            </textarea>
+          </div>
         <ul *ngIf="quiz.questions?.length">
           <li *ngFor="let item of quiz.questions">
             <div class="d-flex jc-between gap-12">

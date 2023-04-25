@@ -59,13 +59,13 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
   checkIsCreateDisabled() {
-    return this.isProcessing || !this.quiz.name
+    return this.isProcessing || !this.quiz.name.trim()
   }
 
 
   createQuiz() {
     const qIDs: string[] = [...this.quiz.questions].map(q => q._id)
-    this.quizAPI.createQuiz({name: this.quiz.name, questionIDs: qIDs}).subscribe({
+    this.quizAPI.createQuiz({name: this.quiz.name.trim(), questionIDs: qIDs}).subscribe({
       next: quiz => {
         console.log(quiz)
         this.closeDialogWithData(quiz)

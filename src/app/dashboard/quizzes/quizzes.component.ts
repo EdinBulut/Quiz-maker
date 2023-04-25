@@ -57,6 +57,7 @@ export class QuizzesComponent implements OnInit {
     const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.crudDialogSettings(Crud.CREATE))
     dialogRef.afterClosed().subscribe({
       next: createdQuiz => {
+        if (!createdQuiz) return
         this.quizzes$ = this.quizzes$.pipe(
           take(1),
           map(quizzes => [createdQuiz, ...quizzes]),

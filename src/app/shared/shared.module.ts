@@ -12,12 +12,14 @@ import { FilterByKeyPipe } from './pipes/filter-by-key.pipe';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationHorizontalComponent } from './components/navigation-horizontal/navigation-horizontal.component';
 import { RouterModule } from '@angular/router';
+import {TextFieldModule} from '@angular/cdk/text-field';
 
 
 const modules = [
   CommonModule,
   FormsModule,
   RouterModule,
+  TextFieldModule,
 ]
 
 const materialModules = [
