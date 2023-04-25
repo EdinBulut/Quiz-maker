@@ -59,6 +59,7 @@
 }
 
 
+
 .primary-stroked-button {
   border: 1px solid var(--primary-3);
   background-color: transparent;
@@ -67,6 +68,11 @@
   &:hover {
     color: var(--main-background);
     background: var(--primary-4);
+  }
+
+  &.primary-selected-button {
+    color: var(--main-background);
+    background-color: var(--primary-3);
   }
 }
 

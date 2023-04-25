@@ -10,11 +10,14 @@ import { FormsModule } from '@angular/forms';
 import { HighlightTextPipe } from './pipes/highlight-text.pipe';
 import { FilterByKeyPipe } from './pipes/filter-by-key.pipe';
 import { HeaderComponent } from './components/header/header.component';
+import { NavigationHorizontalComponent } from './components/navigation-horizontal/navigation-horizontal.component';
+import { RouterModule } from '@angular/router';
 
 
 const modules = [
   CommonModule,
-  FormsModule
+  FormsModule,
+  RouterModule,
 ]
 
 const materialModules = [
@@ -29,6 +32,7 @@ const materialModules = [
 const components = [
   HeaderComponent,
   ConfirmDialogComponent,
+  NavigationHorizontalComponent,
 ]
 
 
@@ -41,7 +45,7 @@ const pipes = [
 @NgModule({
   declarations: [
     components,
-    pipes
+    pipes,
   ],
   imports: [
     modules,
