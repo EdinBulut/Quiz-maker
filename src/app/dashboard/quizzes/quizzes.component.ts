@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable, delay, filter, from, map, shareReplay, take, tap, toArray } from 'rxjs';
 import { Quiz } from './models/quiz-model';
-import { QuizzesService } from '../../shared/API/quizAPI/quiz-api.service';
+import { QuizAPIService } from '../../shared/API/quizAPI/quiz-api.service';
 import { skeletonLoaderData } from '../../shared/constants/skeleton.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/components/dialogs/confirm-dialog/confirm-dialog.component';
@@ -25,7 +25,7 @@ export class QuizzesComponent implements OnInit {
   searchValue = ''
 
   constructor(
-    private quizzesService: QuizzesService,
+    private quizAPI: QuizAPIService,
     private dialog: MatDialog,
     private cdRef: ChangeDetectorRef,
     private snackBar: MatSnackBar,
@@ -36,12 +36,13 @@ export class QuizzesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQuizzes()
+    // this.createQuiz()
   }
 
 
 
   getQuizzes() {
-    this.quizzes$ = this.quizzesService.getQuizzes()
+    this.quizzes$ = this.quizAPI.getQuizzes()
       .pipe(
         delay(300),
         map(quizzes => quizzes.sort((q1, q2) => q1.name < q2.name ? -1 : 1)),
@@ -54,6 +55,24 @@ export class QuizzesComponent implements OnInit {
 
   createQuiz() {
     const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.crudDialogSettings(Crud.CREATE))
+    dialogRef.afterClosed().subscribe({
+      next: createdQuiz => {
+        this.quizzes$ = this.quizzes$.pipe(
+          take(1),
+          map(quizzes => [createdQuiz, ...quizzes]),
+          tap(() => {
+            this.isProcessing = false
+            this.cdRef.detectChanges()
+            const message = 'New quiz successfully created!'
+            this.snackBar.open(message, '', {
+              horizontalPosition: 'center',
+              duration: 3000
+            });
+          })
+        )
+      },
+      error: err => console.error(err)
+    })
   }
 
 
@@ -111,7 +130,7 @@ export class QuizzesComponent implements OnInit {
 
   onDeleteQuizConfirmed(quizID: string) {
     this.isProcessing = true
-    this.quizzesService.deleteQuiz(quizID).subscribe({
+    this.quizAPI.deleteQuiz(quizID).subscribe({
       next: quiz => {
         this.quizzes$ = this.quizzes$.pipe(
           map(quizzes => quizzes.filter(q => q._id !== quiz._id)),

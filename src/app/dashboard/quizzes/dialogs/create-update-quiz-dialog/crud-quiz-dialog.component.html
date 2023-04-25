@@ -1,4 +1,4 @@
-<div class="d-flex jc-center ai-center h-100vh m-16">
+<div class="d-flex jc-center ai-center h-100vh">
   <mat-card [class.top-to-bottom]='isClosed'>
     <mat-card-content>
       <div class="primary-icon x-in-circle-icon icon-20" (click)="closeDialog()"></div>
@@ -12,6 +12,10 @@
           </ng-container>
         </h2>
 
+        <div class="input-wrapper quiz-name" [class.focused-input-wrapper]="isSearchInFocus">
+          <input type="text" placeholder="Search for quiz" [(ngModel)]="quiz.name" (focus)="isSearchInFocus=true"
+            (blur)="isSearchInFocus=false">
+        </div>
         <ul *ngIf="quiz.questions?.length">
           <li *ngFor="let item of quiz.questions">
             <div class="d-flex jc-between gap-12">
@@ -27,16 +31,16 @@
           </li>
         </ul>
 
-        <div class="d-flex gap-16">
-          <button class="action-button primary-stroked-button" matRipple (click)="closeDialog()">
-            <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
-                <p>Create quiz</p>
-            </ng-container>
-            <ng-template #updateQuizBtn>
-                <p>Save changes</p>
-            </ng-template>
+        <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
+          <button class="action-button primary-button" matRipple (click)="createQuiz()" [disabled]="checkIsCreateDisabled()">
+            <p>Create quiz</p>
           </button>
-        </div>
+        </ng-container>
+        <ng-template #updateQuizBtn>
+          <button class="action-button primary-button" matRipple (click)="closeDialog()" [disabled]="">
+            <p>Save changes</p>
+          </button>
+        </ng-template>
       </div>
     </mat-card-content>
   </mat-card>
