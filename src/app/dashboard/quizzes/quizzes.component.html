@@ -3,7 +3,7 @@
 
   <ng-container *ngIf="(quizzes$ | async) as quizzes; else loadingQuizzes">
     <div class="d-flex fd-column gap-24  quizzes-actions-wrapper">
-      <button class="action-button primary-button" matRipple (click)="isProcessing = !isProcessing">
+      <button class="action-button primary-button" matRipple (click)="createQuiz()">
         <div class="plus-icon action-icon icon-16"></div>
         <p>Create new quiz</p>
       </button>
@@ -17,16 +17,16 @@
 
     <ng-container *ngIf="quizzes.length else noQuizzesContainer">
       <ul *ngIf="(quizzes | filterByKey : searchValue : 'name').length else noSearchResults">
-        <li *ngFor="let quiz of (quizzes | filterByKey : searchValue : 'name')">
+        <li *ngFor="let quiz of (quizzes | filterByKey : searchValue : 'name')" (click)="updateQuiz(quiz)">
           <div class="d-flex jc-between gap-12">
             <div class="d-flex fd-column gap-4">
               <h2>{{quiz.name}}</h2>
-              <p class="secondary-text">{{quiz.questions.length}}
-                {{quiz.questions.length > 1 ? 'questions' : 'question'}}</p>
+              <p class="secondary-text">{{quiz.questions?.length}}
+                {{quiz.questions?.length > 1 ? 'questions' : 'question'}}</p>
             </div>
             <div class="d-flex jc-center ai-center gap-12">
               <div class="primary-icon play-icon icon-16"></div>
-              <div class="danger-icon trash-icon icon-16" (click)="deleteQuiz(quiz)"></div>
+              <div class="danger-icon trash-icon icon-16" (click)="$event.stopPropagation(); deleteQuiz(quiz)"></div>
             </div>
           </div>
         </li>
@@ -34,7 +34,6 @@
       <ng-template #noSearchResults>
         <p class="ta-center">There are no results for search <strong>"{{searchValue}}"</strong></p>
       </ng-template>
-      
     </ng-container>
 
     <ng-template #noQuizzesContainer>

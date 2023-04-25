@@ -1,0 +1,45 @@
+<div class="d-flex jc-center ai-center h-100vh m-16">
+  <mat-card [class.top-to-bottom]='isClosed'>
+    <mat-card-content>
+      <div class="primary-icon x-in-circle-icon icon-20" (click)="closeDialog()"></div>
+      <div class="d-flex fd-column gap-32">
+        <h2 class='ta-center dialog-title' [ngSwitch]="injectedData.CRUD">
+          <ng-container *ngSwitchCase="CRUD.CREATE">
+            Create Quiz
+          </ng-container>
+          <ng-container *ngSwitchCase="CRUD.UPDATE">
+            Edit Quiz
+          </ng-container>
+        </h2>
+
+        <ul *ngIf="quiz.questions?.length">
+          <li *ngFor="let item of quiz.questions">
+            <div class="d-flex jc-between gap-12">
+              <div class="d-flex fd-column gap-4">
+                <h2>{{item.question}}</h2>
+                <p class="secondary-text">{{item.answer}}</p>
+              </div>
+              <div class="d-flex jc-center ai-center gap-12">
+                <div class="primary-icon play-icon icon-16"></div>
+                <div class="danger-icon trash-icon icon-16"></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="d-flex gap-16">
+          <button class="action-button primary-stroked-button" matRipple (click)="closeDialog()">
+            <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
+                <p>Create quiz</p>
+            </ng-container>
+            <ng-template #updateQuizBtn>
+                <p>Save changes</p>
+            </ng-template>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="dialog-background" [class.opake-to-transparent-bkg]="isClosed" (click)="closeDialog()">
+</div>

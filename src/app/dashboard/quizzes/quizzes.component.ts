@@ -9,6 +9,8 @@ import { DialogVariables } from '../../shared/models/dialog-variables.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
+import { CreateUpdateQuizDialogComponent } from './dialogs/create-update-quiz-dialog/create-update-quiz-dialog.component';
+import { Crud } from 'src/app/shared/models/crud.enum';
 
 @Component({
   selector: 'app-quizzes',
@@ -50,6 +52,32 @@ export class QuizzesComponent implements OnInit {
 
 
 
+  createQuiz() {
+    const dialogRef = this.dialog.open(CreateUpdateQuizDialogComponent, this.crudDialogSettings(Crud.CREATE))
+  }
+
+
+
+  crudDialogSettings(CRUD: Crud, quiz?: Quiz) {
+    const settings = {
+      width: '100%',
+      maxWidth: '456px',
+      minHeight: '276px',
+      panelClass: 'bottom-to-top',
+      data: { CRUD, quiz },
+      scrollStrategy: new NoopScrollStrategy()
+    }
+    return settings
+  }
+
+
+
+  updateQuiz(quiz: Quiz) {
+    const dialogRef = this.dialog.open(CreateUpdateQuizDialogComponent, this.crudDialogSettings(Crud.UPDATE, quiz))
+  }
+
+
+
   deleteQuiz(quiz: Quiz) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '100%',
@@ -61,8 +89,22 @@ export class QuizzesComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(confirmed => {
-      if (confirmed) this.onDeleteQuizConfirmed(quiz._id)
+      if (confirmed && quiz._id) this.onDeleteQuizConfirmed(quiz._id)
     })
+  }
+
+
+
+  deleteQuizSettings(quizName: string) {
+    const settings = {
+      width: '100%',
+      maxWidth: '456px',
+      minHeight: '276px',
+      panelClass: 'bottom-to-top',
+      data: this.confirmDeleteQuizData(quizName),
+      scrollStrategy: new NoopScrollStrategy()
+    }
+    return settings
   }
 
 
@@ -85,9 +127,9 @@ export class QuizzesComponent implements OnInit {
         )
       },
       error: err => console.log(err)
-      })
+    })
   }
-  
+
 
 
   confirmDeleteQuizData(quizName: string) {
