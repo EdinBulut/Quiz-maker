@@ -12,3 +12,14 @@
 }
 
 
+.input-wrapper:not(.focused-input-wrapper) {
+  border-color: var(--primary-0);
+  .search-icon {
+    background-color: var(--primary-0);
+  }
+
+  input::placeholder {
+    color: var(--primary-0);
+    font-weight: 400;
+  }
+}

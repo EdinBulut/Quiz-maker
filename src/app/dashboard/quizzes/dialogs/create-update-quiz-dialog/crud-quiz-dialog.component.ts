@@ -15,6 +15,7 @@ export class CrudQuizDialogComponent implements OnInit {
 
   isClosed = false
   isSearchInFocus = false
+  isTextareaInFocus = false
   isProcessing = false
   CRUD = Crud
   quiz: Quiz = {
@@ -22,6 +23,7 @@ export class CrudQuizDialogComponent implements OnInit {
     questions: []
   }
 
+  questionSearch = ''
 
 
 

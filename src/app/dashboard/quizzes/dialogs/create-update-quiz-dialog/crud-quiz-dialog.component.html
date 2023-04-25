@@ -12,12 +12,20 @@
           </ng-container>
         </h2>
 
-          <div class="textarea-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
-            <textarea class="textarea"  matInput cdkTextareaAutosize matInput minlength="1"
-              required placeholder="Quiz name" [(ngModel)]="quiz.name" 
-              cdkAutosizeMinRows="1" cdkAutosizeMaxRows="7" (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
-            </textarea>
-          </div>
+        <div class="textarea-wrapper" [class.focused-input-wrapper]="isTextareaInFocus">
+          <textarea class="textarea" matInput cdkTextareaAutosize matInput minlength="1" required
+            placeholder="Quiz name" [(ngModel)]="quiz.name" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="7"
+            (focus)="isTextareaInFocus=true" (blur)="isTextareaInFocus=false">
+          </textarea>
+        </div>
+
+        <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus" >
+          <div class="icon-20 search-icon prefix"></div>
+          <input type="text" placeholder="Search for quiz" [(ngModel)]="questionSearch"
+          (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
+        </div>
+
+
         <ul *ngIf="quiz.questions?.length">
           <li *ngFor="let item of quiz.questions">
             <div class="d-flex jc-between gap-12">
@@ -34,7 +42,8 @@
         </ul>
 
         <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
-          <button class="action-button primary-button" matRipple (click)="createQuiz()" [disabled]="checkIsCreateDisabled()">
+          <button class="action-button primary-button" matRipple (click)="createQuiz()"
+            [disabled]="checkIsCreateDisabled()">
             <p>Create quiz</p>
           </button>
         </ng-container>
