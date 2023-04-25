@@ -42,6 +42,7 @@ export class QuizzesComponent implements OnInit {
     this.quizzes$ = this.quizzesService.getQuizzes()
       .pipe(
         delay(500),
+        map(quizzes => quizzes.sort((q1, q2) => q1.name < q2.name ? -1 : 1)),
         tap(quizes => console.log(quizes)),
         shareReplay(1)
       )
