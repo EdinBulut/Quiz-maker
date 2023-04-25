@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { QuizzesComponent } from './quizzes/quizzes.component';
+import { QuestionsComponent } from './questions/questions.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'quizzes', pathMatch: 'full'},
   {
-    path: 'quizzes',
-    loadChildren: () => import('./quizzes/quizzes.module').then(m => m.QuizzesModule)
-  },
+    path: 'quizzes', component: QuizzesComponent},
   {
-    path: 'questions',
-    loadChildren: () => import('./questions/questions.module').then(m => m.QuestionsModule)
-  },
+    path: 'questions', component: QuestionsComponent},
 ];
 
 @NgModule({
