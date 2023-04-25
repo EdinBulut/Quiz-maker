@@ -11,18 +11,4 @@
   padding-top: 16px;
 }
 
-.quiz-name.input-wrapper {
-  height: fit-content;
-  border: none;
-  border-radius: 0;
-  border-bottom: 2px solid var(--primary-0);
 
-  input {
-    font-size: 24px;
-    padding: 2px;
-  }
-}
-
-.input-wrapper.focused-input-wrapper {
-  border-bottom: 2px solid var(--primary-3);
-}
