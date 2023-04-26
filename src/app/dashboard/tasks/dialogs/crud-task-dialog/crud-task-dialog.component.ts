@@ -62,12 +62,11 @@ export class CrudTaskDialogComponent implements OnInit {
   isSaveEnabled() {
     if (this.isProcessing) return false
     const {question, answer} = this.task
-    const initialTask = this.injectedData.task?.question?.trim()
-    if (!question) return
-    const isNameChanged = initialTask !== question
+    if (!question || !answer) return
+    const initialQuestion = this.injectedData.task?.question?.trim()
+    const isNameChanged = initialQuestion !== question
     if (isNameChanged) return true
     const initialAnswer = this.injectedData.task?.question?.trim()
-    if (!answer) return
     const isAnswerChanged = initialAnswer !== answer
     return isAnswerChanged
   }
