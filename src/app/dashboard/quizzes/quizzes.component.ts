@@ -54,7 +54,7 @@ export class QuizzesComponent implements OnInit {
 
 
   createQuiz() {
-    const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.crudDialogSettings(Crud.CREATE))
+    const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.createUpdateDialogSettings(Crud.CREATE))
     dialogRef.afterClosed().subscribe({
       next: createdQuiz => {
         if (!createdQuiz) return
@@ -78,22 +78,34 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  crudDialogSettings(CRUD: Crud, quiz?: Quiz) {
-    const settings = {
-      width: '100%',
-      maxWidth: '456px',
-      minHeight: '276px',
-      panelClass: 'bottom-to-top',
-      data: { CRUD, quiz },
-      scrollStrategy: new NoopScrollStrategy()
-    }
-    return settings
-  }
-
-
-
   updateQuiz(quiz: Quiz) {
-    const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.crudDialogSettings(Crud.UPDATE, quiz))
+    const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.createUpdateDialogSettings(Crud.UPDATE, quiz))
+    dialogRef.afterClosed().subscribe({
+      next: updatedQuiz => {
+        if (!updatedQuiz) {
+          const message = 'No changes have been made'
+          this.snackBarTrigger(message)
+          return
+        }
+        this.quizzes$ = this.quizzes$.pipe(
+          map(quizzes => {
+            const foundQuiz = quizzes.find(q => q._id === updatedQuiz._id)
+            if (foundQuiz) {
+              foundQuiz.name = updatedQuiz.name
+              foundQuiz.questions = updatedQuiz.questions
+            }
+            return quizzes
+          }),
+          tap(() => {
+            this.isProcessing = false
+            this.cdRef.detectChanges()
+            const message = 'Quiz successfully updated!'
+            this.snackBarTrigger(message)
+          })
+        )
+      },
+      error: err => console.error(err)
+    })
   }
 
 
@@ -115,20 +127,6 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  deleteQuizSettings(quizName: string) {
-    const settings = {
-      width: '100%',
-      maxWidth: '456px',
-      minHeight: '276px',
-      panelClass: 'bottom-to-top',
-      data: this.confirmDeleteQuizData(quizName),
-      scrollStrategy: new NoopScrollStrategy()
-    }
-    return settings
-  }
-
-
-
   onDeleteQuizConfirmed(quizID: string) {
     this.isProcessing = true
     this.quizAPI.deleteQuiz(quizID).subscribe({
@@ -139,10 +137,7 @@ export class QuizzesComponent implements OnInit {
             this.isProcessing = false
             this.cdRef.detectChanges()
             const message = 'Quiz successfully deleted'
-            this.snackBar.open(message, '', {
-              horizontalPosition: 'center',
-              duration: 3000
-            });
+            this.snackBarTrigger(message)
           })
         )
       },
@@ -168,6 +163,42 @@ export class QuizzesComponent implements OnInit {
       },
     }
     return dialogVariables
+  }
+
+
+
+  createUpdateDialogSettings(CRUD: Crud, quiz?: Quiz) {
+    const settings = {
+      width: '100%',
+      maxWidth: '456px',
+      minHeight: '276px',
+      panelClass: 'bottom-to-top',
+      data: { CRUD, quiz },
+      scrollStrategy: new NoopScrollStrategy()
+    }
+    return settings
+  }
+
+
+  deleteQuizSettings(quizName: string) {
+    const settings = {
+      width: '100%',
+      maxWidth: '456px',
+      minHeight: '276px',
+      panelClass: 'bottom-to-top',
+      data: this.confirmDeleteQuizData(quizName),
+      scrollStrategy: new NoopScrollStrategy()
+    }
+    return settings
+  }
+
+
+
+  snackBarTrigger(message: string) {
+    this.snackBar.open(message, '', {
+      horizontalPosition: 'center',
+      duration: 3000
+    });
   }
 
 

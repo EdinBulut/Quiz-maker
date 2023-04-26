@@ -26,6 +26,10 @@ export class CrudQuizDialogComponent implements OnInit {
     questions: []
   }
 
+  initialQstnsIDs: string[] = []
+  addedQstnsIDs: string[] = []
+  removedQstnsIDs: string[] = []
+
 
   @ViewChild('searchQuestion') searchQuestion!: ElementRef<HTMLInputElement>;
   searchQuestionsInput = ''
@@ -52,6 +56,9 @@ export class CrudQuizDialogComponent implements OnInit {
   initialSettings() {
     if (this.injectedData.CRUD === this.CRUD.UPDATE) {
       this.quiz = Object.assign({}, this.injectedData.quiz)
+      this.quiz.questions = this.quiz.questions.map(x => JSON.parse(JSON.stringify(x)))
+
+      this.initialQstnsIDs = [...this.quiz.questions].map(q => q._id)
     }
   }
 
@@ -90,6 +97,38 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
+  updateQuiz() {
+    if (!this.quiz._id) return
+    this.addedQstnsIDs = this.addedQstnsIDs.filter(qID => !this.initialQstnsIDs.some(x => x === qID))
+    console.log('added', this.addedQstnsIDs)
+    console.log('init', this.initialQstnsIDs)
+
+    this.quizAPI.updateQuiz(this.quiz._id, { name: this.quiz.name.trim(), addQuestions: this.addedQstnsIDs, removeQuestions: this.removedQstnsIDs }).subscribe({
+      next: quiz => {
+        console.log(quiz)
+        this.closeDialogWithData(quiz)
+      },
+      error: err => console.error(err)
+    })
+  }
+
+
+
+  isSaveEnabled() {
+    const initialName = this.injectedData.quiz?.name?.trim()
+    const newName = this.quiz.name.trim()
+    if (!newName) return false
+    if (!this.quiz.questions.length) return false
+
+    const isNameChanged = initialName !== newName
+    if (isNameChanged) return true
+    if (!!this.removedQstnsIDs.length) return true
+    const addedQstns = this.addedQstnsIDs.filter(qID => !this.initialQstnsIDs.some(x => x === qID))
+    return !!addedQstns.length
+  }
+
+
+
   searchQuestionsTrigger() {
     setTimeout(() => {
       fromEvent(this.searchQuestion.nativeElement, 'keyup').pipe(
@@ -117,8 +156,18 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
-  addQuestionIntoQuiz(question: Question) {
-    this.quiz.questions.push(question)
+  addQuestionIntoQuiz(addedQ: Question) {
+    this.quiz.questions.push(addedQ)
+    this.addedQstnsIDs.push(addedQ._id)
+    this.removedQstnsIDs = this.removedQstnsIDs.filter(id => id !== addedQ._id)
+  }
+
+
+
+  removeQuestionFromQuiz(qID: string) {
+    this.quiz.questions = this.quiz.questions.filter(q => q._id !== qID)
+    this.addedQstnsIDs = this.addedQstnsIDs.filter(id => id !== qID)
+    if (this.initialQstnsIDs.some(x => x === qID)) this.removedQstnsIDs.push(qID)
   }
 
   

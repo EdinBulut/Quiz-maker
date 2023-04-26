@@ -14,14 +14,14 @@
 
         <div class="textarea-wrapper" [class.focused-input-wrapper]="isTextareaInFocus">
           <textarea class="textarea" matInput cdkTextareaAutosize matInput minlength="1" required
-            placeholder="Quiz name" [(ngModel)]="quiz.name" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="7"
+            placeholder="Quiz name" [(ngModel)]="quiz.name" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
             (focus)="isTextareaInFocus=true" (blur)="isTextareaInFocus=false">
           </textarea>
         </div>
 
         <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
           <div class="icon-20 search-icon prefix"></div>
-          <input type="text" placeholder="Search for question" #searchQuestion
+          <input type="text" placeholder="Search existing questions" #searchQuestion
             (focus)="isSearchInFocus=true; showDropdown = true" (clickOutside)="showDropdown = false"
             (blur)="isSearchInFocus=false" [(ngModel)]="searchQuestionsInput">
           <ng-container *ngIf="(questions$ | async) as questions">
@@ -35,14 +35,14 @@
                         <p>{{q.answer}}</p>
                       </div>
 
-                      <ng-container *ngIf="checkIsQuestionAdded(q._id) else AddedBtn">
+                      <ng-container *ngIf="checkIsQuestionAdded(q._id) else RemoveBtn">
                         <button class="action-button secondary-stroked-button circle-button" matRipple (click)="addQuestionIntoQuiz(q)">
                           <div class="plus-icon action-icon icon-16"></div>
                         </button>
                       </ng-container>
-                      <ng-template #AddedBtn>
-                        <div class="action-button action-button-sm secondary-button">
-                          <span>Added</span>
+                      <ng-template #RemoveBtn>
+                        <div class="action-button action-button-sm danger-button" (click)="removeQuestionFromQuiz(q._id)">
+                          <span>Remove</span>
                         </div>
                       </ng-template>
                       
@@ -57,30 +57,31 @@
             </div>
           </ng-container>
         </div>
+        <div class="questions-wrapper">
+          <ul *ngIf="quiz.questions?.length">
+            <li *ngFor="let item of quiz.questions">
+              <div class="d-flex jc-between gap-12">
+                <div class="d-flex fd-column gap-4">
+                  <h2>{{item.question}}</h2>
+                  <p class="secondary-text">{{item.answer}}</p>
+                </div>
 
-        <ul *ngIf="quiz.questions?.length">
-          <li *ngFor="let item of quiz.questions">
-            <div class="d-flex jc-between gap-12">
-              <div class="d-flex fd-column gap-4">
-                <h2>{{item.question}}</h2>
-                <p class="secondary-text">{{item.answer}}</p>
+                <div class="action-button action-button-sm danger-stroked-button as-center" (click)="removeQuestionFromQuiz(item._id)">
+                  <span>Remove</span>
+                </div>
               </div>
-              <div class="d-flex jc-center ai-center gap-12">
-                <div class="primary-icon play-icon icon-16"></div>
-                <div class="danger-icon trash-icon icon-16"></div>
-              </div>
-            </div>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
 
         <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
-          <button class="action-button primary-button" matRipple (click)="createQuiz()"
+          <button class="action-button primary-button" matRipple (click)="createQuiz()" [disabled]="!isSaveEnabled()"
             [disabled]="checkIsCreateDisabled()">
             <p>Create quiz</p>
           </button>
         </ng-container>
         <ng-template #updateQuizBtn>
-          <button class="action-button primary-button" matRipple (click)="closeDialog()" [disabled]="">
+          <button class="action-button primary-button" matRipple (click)="updateQuiz()" [disabled]="!isSaveEnabled()">
             <p>Save changes</p>
           </button>
         </ng-template>
