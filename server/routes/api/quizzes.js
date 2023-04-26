@@ -135,22 +135,22 @@ router.put('/:quizID/remove/questions', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   const quizID = req.params.id;
-  let { name, addQuestions, removeQuestions } = req.body;
+  let { name, addTasks, removeTasks } = req.body;
 
   try {
     let updatedQuiz
 
-    if (addQuestions) {
-      addQuestions = addQuestions.map(qID => new mongoose.Types.ObjectId(qID));
-      const updateObj = { $addToSet: { questions: { $each: addQuestions } } }
+    if (addTasks) {
+      addTasks = addTasks.map(qID => new mongoose.Types.ObjectId(qID));
+      const updateObj = { $addToSet: { questions: { $each: addTasks } } }
       if (name) updateObj.$set = { name }
       updatedQuiz = await Quiz.findByIdAndUpdate(quizID, updateObj, { new: true }).populate('questions');
     }
 
-    if (removeQuestions) {
-      removeQuestions = removeQuestions.map(qID => new mongoose.Types.ObjectId(qID));
-      const updateObj = { $pull: { questions: { $in: removeQuestions } } }
-      if (name && !addQuestions) updateObj.$set = { name }
+    if (removeTasks) {
+      removeTasks = removeTasks.map(qID => new mongoose.Types.ObjectId(qID));
+      const updateObj = { $pull: { questions: { $in: removeTasks } } }
+      if (name && !addTasks) updateObj.$set = { name }
       updatedQuiz = await Quiz.findByIdAndUpdate(quizID, updateObj, { new: true }).populate('questions');
     }
 

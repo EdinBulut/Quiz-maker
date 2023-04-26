@@ -1,11 +1,13 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Quiz } from '../../models/quiz-model';
 import { Crud } from 'src/app/shared/models/crud.enum';
 import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 import { Observable, debounceTime, fromEvent, map, tap } from 'rxjs';
 import { TaskAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
 import { Task } from 'src/app/dashboard/questions/models/task-model';
+import { NoopScrollStrategy } from '@angular/cdk/overlay';
+import { CrudTaskDialogComponent } from 'src/app/dashboard/questions/dialogs/crud-task-dialog/crud-task-dialog.component';
 
 @Component({
   selector: 'app-create-update-quiz-dialog',
@@ -42,6 +44,7 @@ export class CrudQuizDialogComponent implements OnInit {
     private matDialogRef: MatDialogRef<CrudQuizDialogComponent>,
     private quizAPI: QuizAPIService,
     private questionAPI: TaskAPIService,
+    private dialog: MatDialog,
   ) { }
 
 
@@ -165,6 +168,33 @@ export class CrudQuizDialogComponent implements OnInit {
     this.quiz.questions = this.quiz.questions.filter(q => q._id !== qID)
     this.addedQstnsIDs = this.addedQstnsIDs.filter(id => id !== qID)
     if (this.initialQstnsIDs.some(x => x === qID)) this.removedQstnsIDs.push(qID)
+  }
+
+
+  createTask() {
+    const dialogRef = this.dialog.open(CrudTaskDialogComponent, this.createUpdateTaskDialogSettings(Crud.CREATE))
+    dialogRef.afterClosed().subscribe({
+      next: (createdTask: Task) => {
+        if (!createdTask) return
+        this.quiz.questions.unshift(createdTask)
+        this.addedQstnsIDs.push((createdTask._id as string))
+      },
+      error: err => console.error(err)
+    })
+  }
+
+
+
+  createUpdateTaskDialogSettings(CRUD: Crud, task?: Task) {
+    const settings = {
+      width: '100%',
+      maxWidth: '456px',
+      minHeight: '276px',
+      panelClass: 'bottom-to-top',
+      data: { CRUD, task },
+      scrollStrategy: new NoopScrollStrategy()
+    }
+    return settings
   }
 
   
