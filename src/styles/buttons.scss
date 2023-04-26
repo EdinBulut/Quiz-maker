@@ -93,6 +93,31 @@
 }
 
 
+.danger-button {
+  border: none;
+  background-color: var(--danger-4);
+  color: var(--main-background);
+  .icon-18, .icon-24 {
+    background-color: var(--main-background);
+  }
+  &:hover {
+    color: var(--main-background);
+    background: var(--danger-3);
+  }
+}
+
+
+.danger-stroked-button {
+  border: 1px solid var(--danger-3);
+  background-color: transparent;
+  color: var(--danger-04);
+  &:hover {
+    color: var(--main-background);
+    background: var(--danger-4);
+  }
+}
+
+
 
 
 .action-button.loading-block {

@@ -127,6 +127,10 @@ textarea {
   padding: 0;
   padding-right: 2px;
   cursor: auto;
+  &::placeholder {
+    color: var(--primary-0);
+    font-weight: 400;
+  }
 
   &::-webkit-scrollbar {
     width: 4px;
