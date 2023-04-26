@@ -6,10 +6,10 @@ import { Question } from '../../models/question-model';
 
 @Component({
   selector: 'app-crud-question-dialog',
-  templateUrl: './crud-question-dialog.component.html',
-  styleUrls: ['./crud-question-dialog.component.scss']
+  templateUrl: './crud-task-dialog.component.html',
+  styleUrls: ['./crud-task-dialog.component.scss']
 })
-export class CrudQuestionDialogComponent implements OnInit {
+export class CrudTaskDialogComponent implements OnInit {
   isClosed = false
   isProcessing= false
   isQstnInFocus = false
@@ -25,7 +25,7 @@ export class CrudQuestionDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public injectedData: { CRUD: Crud, task?: Question },
-    private matDialogRef: MatDialogRef<CrudQuestionDialogComponent>,
+    private matDialogRef: MatDialogRef<CrudTaskDialogComponent>,
     private taskAPI: QuestionAPIService,
   ) { }
 

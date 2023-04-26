@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { QuizzesComponent } from './quizzes/quizzes.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { CrudQuizDialogComponent } from './quizzes/dialogs/create-update-quiz-dialog/crud-quiz-dialog.component';
-import { CrudQuestionDialogComponent } from './questions/dialogs/crud-question-dialog/crud-question-dialog.component';
+import { CrudTaskDialogComponent } from './questions/dialogs/crud-task-dialog/crud-task-dialog.component';
 
 
 @NgModule({
@@ -16,7 +16,7 @@ import { CrudQuestionDialogComponent } from './questions/dialogs/crud-question-d
     QuizzesComponent,
     QuestionsComponent,
     CrudQuizDialogComponent,
-    CrudQuestionDialogComponent
+    CrudTaskDialogComponent
   ],
   imports: [
     DashboardRoutingModule,
