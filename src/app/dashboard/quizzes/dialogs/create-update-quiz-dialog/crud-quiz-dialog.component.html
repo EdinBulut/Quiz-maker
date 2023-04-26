@@ -19,12 +19,44 @@
           </textarea>
         </div>
 
-        <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus" >
+        <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
           <div class="icon-20 search-icon prefix"></div>
-          <input type="text" placeholder="Search for quiz" [(ngModel)]="questionSearch"
-          (focus)="isSearchInFocus=true" (blur)="isSearchInFocus=false">
-        </div>
+          <input type="text" placeholder="Search for question" #searchQuestion
+            (focus)="isSearchInFocus=true; showDropdown = true" (clickOutside)="showDropdown = false"
+            (blur)="isSearchInFocus=false" [(ngModel)]="searchQuestionsInput">
+          <ng-container *ngIf="(questions$ | async) as questions">
+            <div class="dropdown-list-wrapper" [class.show-dropdown-list]="showDropdown">
+              <ul class="dropdown-list" *ngIf="questions.length else noResults">
+                <ng-container *ngFor="let q of questions">
+                  <li class="truncate-text" *ngIf="q?._id" (click)="$event.stopPropagation()">
+                    <div class="d-flex ai-center jc-between">
+                      <div class="d-flex fd-column gap-4">
+                        <h3>{{q.question}}</h3>
+                        <p>{{q.answer}}</p>
+                      </div>
 
+                      <ng-container *ngIf="checkIsQuestionAdded(q._id) else AddedBtn">
+                        <button class="action-button secondary-stroked-button circle-button" matRipple (click)="addQuestionIntoQuiz(q)">
+                          <div class="plus-icon action-icon icon-16"></div>
+                        </button>
+                      </ng-container>
+                      <ng-template #AddedBtn>
+                        <div class="action-button action-button-sm secondary-button">
+                          <span>Added</span>
+                        </div>
+                      </ng-template>
+                      
+                    </div>
+                  </li>
+                </ng-container>
+              </ul>
+              <ng-template #noResults>
+                <p class="p-16">No results for <strong>{{searchQuestionsInput}}</strong></p>
+              </ng-template>
+              
+            </div>
+          </ng-container>
+        </div>
 
         <ul *ngIf="quiz.questions?.length">
           <li *ngFor="let item of quiz.questions">
