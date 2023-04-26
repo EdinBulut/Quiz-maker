@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { Quiz } from 'src/app/dashboard/quizzes/models/quiz-model';
+import { Task } from 'src/app/dashboard/tasks/models/task-model';
 import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 
 @Component({
@@ -9,9 +11,11 @@ import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
   styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
-
-  quizID!: string
   quiz!: Quiz
+  isPlaying = false
+  selectedTask!: Task
+  currentIndex = 0
+  private unsubscriber$: Subject<void> = new Subject<void>();
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,34 +34,65 @@ export class QuizComponent implements OnInit {
   getRouteParams() {
     const quizID = this.activatedRoute.snapshot.paramMap.get('quizID')
     if (quizID) this.getQuizData(quizID)
-
-
-    this.activatedRoute.firstChild?.params?.subscribe(params => {
-      console.log(params)
-      console.log(params['taskID'])
-    })
   }
 
 
 
   getQuizData(quizID: string) {
-    console.log('quizID', quizID)
-    this.quizID = quizID
-    this.quizAPI.getQuiz(quizID).subscribe({
-      next: quiz => {
-        if (!quiz._id) return
-        this.quiz = quiz
-        console.log(quiz)
-      },
-      error: err => console.error(err)
-    })
+    this.quizAPI.getQuiz(quizID).pipe(
+      takeUntil(this.unsubscriber$),
+    )
+      .subscribe({
+        next: quiz => {
+          if (!quiz._id) return
+          quiz.questions = quiz.questions.map(q => {
+            return Object.assign({ isShowed: false }, q)
+          })
+          this.quiz = quiz
+          console.log(quiz);
+
+        },
+        error: err => console.error(err)
+      })
   }
+
 
 
   playQuiz() {
-
+    this.selectedTask = this.quiz.questions[0]
   }
 
+
+
+  onPrevBtn() {
+    if (this.isPrevDisabled()) return
+    this.currentIndex--
+  }
+
+
+
+  onNextBtn() {
+    console.log('next', this.currentIndex)
+    if (this.isNextDisabled()) return
+    this.currentIndex++
+  }
+
+
+
+  isNextDisabled() {
+    return (this.currentIndex >= this.quiz.questions.length - 1)
+  }
+
+
+
+  isPrevDisabled() {
+    return this.currentIndex <= 0
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscriber$.next()
+    this.unsubscriber$.unsubscribe()
+  }
 
 
 }

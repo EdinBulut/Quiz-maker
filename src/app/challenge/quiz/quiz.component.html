@@ -1,28 +1,36 @@
-<div class="d-flex fd-column ai-center jc-center h-100 w-100 gap-24 ">
+<div class="d-flex fd-column ai-center jc-center h-min-100vh w-100 gap-24 ">
   <ng-container *ngIf="quiz">
-
     <div class="d-flex fd-column jc-center ai-center f-grow-1 w-100 gap-16">
+      <ng-container *ngIf="!selectedTask else taskContainer">
         <div class="d-flex fd-column ai-center jc-center">
-            <h1>{{quiz.name}}</h1>
-            <h4 class="secondary-text">This quiz has {{quiz.questions.length}} questions</h4>
+          <h1>{{quiz.name}}</h1>
+          <h4 class="secondary-text">This quiz has {{quiz.questions.length}} questions</h4>
         </div>
         <button class="action-button primary-button" matRipple (click)="playQuiz()" [disabled]="!quiz.questions.length">
-            <p>Play quiz</p>
+          <p>Play quiz</p>
         </button>
+      </ng-container>
+
+      <ng-template #taskContainer>
+        <ng-container *ngFor="let task of quiz.questions; let i = index">
+          <app-task [task]="task" *ngIf="currentIndex === i">
+          </app-task>
+        </ng-container>
+      </ng-template>
     </div>
 
-
-    <div class="action-button-wrapper">
-      <button class="action-button primary-stroked-button" matRipple (click)="playQuiz()"
-        [disabled]="!quiz.questions.length">
+    <div class="action-button-wrapper" *ngIf="selectedTask">
+      <button (click)="onPrevBtn()"
+      class="action-button primary-stroked-button" matRipple 
+      [disabled]="isPrevDisabled()">
         <p>Prev</p>
       </button>
-      <button class="action-button primary-button" matRipple (click)="playQuiz()" [disabled]="!quiz.questions.length">
+      <button class="action-button primary-button" 
+      matRipple (click)="onNextBtn()" [disabled]="isNextDisabled()">
         <p>Next</p>
       </button>
     </div>
 
 
-    <router-outlet></router-outlet>
   </ng-container>
 </div>
