@@ -21,12 +21,12 @@
 
         <button class="action-button primary-button" matRipple (click)="createTask()">
           <div class="plus-icon action-icon icon-16"></div>
-          <p>Create new question</p>
+          <p>Create new task</p>
         </button>
 
         <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
           <div class="icon-20 search-icon prefix"></div>
-          <input type="text" placeholder="Search existing questions" #searchTask
+          <input type="text" placeholder="Search existing tasks" #searchTask
             (focus)="isSearchInFocus=true; showDropdown = true" (clickOutside)="showDropdown = false"
             (blur)="isSearchInFocus=false" [(ngModel)]="searchTasksInput">
           <ng-container *ngIf="(questions$ | async) as questions">

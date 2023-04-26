@@ -14,14 +14,14 @@
   
           <div class="textarea-wrapper" [class.focused-input-wrapper]="isQstnInFocus">
             <textarea class="textarea" matInput cdkTextareaAutosize matInput minlength="1" required
-              placeholder="Task question" [(ngModel)]="task.question" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
+              placeholder="Question" [(ngModel)]="task.question" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
               (focus)="isQstnInFocus=true" (blur)="isQstnInFocus=false">
             </textarea>
           </div>
 
           <div class="textarea-wrapper" [class.focused-input-wrapper]="isAnswerInFocus">
             <textarea class="textarea" matInput cdkTextareaAutosize matInput minlength="1" required
-              placeholder="Task answer" [(ngModel)]="task.answer" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
+              placeholder="Answer" [(ngModel)]="task.answer" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
               (focus)="isAnswerInFocus=true" (blur)="isAnswerInFocus=false">
             </textarea>
           </div>
