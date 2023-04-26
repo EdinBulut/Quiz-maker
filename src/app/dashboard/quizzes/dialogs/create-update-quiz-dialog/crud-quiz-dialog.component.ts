@@ -8,6 +8,7 @@ import { TaskAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
 import { Task } from 'src/app/dashboard/tasks/models/task-model';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
 import { CrudTaskDialogComponent } from 'src/app/dashboard/tasks/dialogs/crud-task-dialog/crud-task-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-update-quiz-dialog',
@@ -45,6 +46,7 @@ export class CrudQuizDialogComponent implements OnInit {
     private quizAPI: QuizAPIService,
     private questionAPI: TaskAPIService,
     private dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) { }
 
 
@@ -171,6 +173,7 @@ export class CrudQuizDialogComponent implements OnInit {
   }
 
 
+
   createTask() {
     const dialogRef = this.dialog.open(CrudTaskDialogComponent, this.createUpdateTaskDialogSettings(Crud.CREATE))
     dialogRef.afterClosed().subscribe({
@@ -178,6 +181,8 @@ export class CrudQuizDialogComponent implements OnInit {
         if (!createdTask) return
         this.quiz.questions.unshift(createdTask)
         this.addedQstnsIDs.push((createdTask._id as string))
+        const message = 'Task successfully created'
+        this.snackBarTrigger(message)
       },
       error: err => console.error(err)
     })
@@ -185,7 +190,8 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
-  createUpdateTaskDialogSettings(CRUD: Crud, task?: Task) {
+  createUpdateTaskDialogSettings(CRUD: Crud, task?: Task) { 
+    // will be moved into dialog-settings service later
     const settings = {
       width: '100%',
       maxWidth: '456px',
@@ -198,5 +204,14 @@ export class CrudQuizDialogComponent implements OnInit {
   }
 
   
+
+  snackBarTrigger(message: string) { 
+    // will be moved into snackbar service later
+    this.snackBar.open(message, '', {
+      horizontalPosition: 'center',
+      duration: 3000
+    });
+  }
+
 
 }
