@@ -7,10 +7,10 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionsService {
+export class QuestionAPIService {
 
   // private questionsUrl = '/questions';
-  private questionsUrl = `${environment.baseURL}/quizzes`
+  private questionsUrl = `${environment.baseURL}/questions`
   httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
 
   constructor(private http: HttpClient) { }
@@ -22,9 +22,9 @@ export class QuestionsService {
   }
 
 
-  searchQuestions(searchValue: string): Observable<Question> {
+  searchQuestions(searchValue: string): Observable<Question[]> {
     const url = `${this.questionsUrl}/search/${searchValue}`
-    return this.http.get<Question>(url)
+    return this.http.get<Question[]>(url)
   }
 
 

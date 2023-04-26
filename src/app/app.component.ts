@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionsService } from './shared/API/questionAPI/question-api.service';
+import { QuestionAPIService } from './shared/API/questionAPI/question-api.service';
 import { Observable, tap } from 'rxjs';
 import { Question } from './dashboard/questions/models/question-model';
 import { } from 'rxjs/operators'
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   questions$!: Observable<Question[]>
   quizes$!: Observable<Quiz[]>
   constructor(
-    private questionsService: QuestionsService,
+    private questionsService: QuestionAPIService,
     private quizAPI: QuizAPIService
     ) { }
 
