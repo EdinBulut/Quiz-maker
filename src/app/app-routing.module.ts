@@ -7,6 +7,10 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
   },
+  {
+    path: 'challenge',
+    loadChildren: () => import('./challenge/challenge.module').then(m => m.ChallengeModule)
+  },
 ]
 
 @NgModule({
