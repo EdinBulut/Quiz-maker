@@ -5,9 +5,9 @@ import { Crud } from 'src/app/shared/models/crud.enum';
 import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 import { Observable, debounceTime, fromEvent, map, tap } from 'rxjs';
 import { TaskAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
-import { Task } from 'src/app/dashboard/questions/models/task-model';
+import { Task } from 'src/app/dashboard/tasks/models/task-model';
 import { NoopScrollStrategy } from '@angular/cdk/overlay';
-import { CrudTaskDialogComponent } from 'src/app/dashboard/questions/dialogs/crud-task-dialog/crud-task-dialog.component';
+import { CrudTaskDialogComponent } from 'src/app/dashboard/tasks/dialogs/crud-task-dialog/crud-task-dialog.component';
 
 @Component({
   selector: 'app-create-update-quiz-dialog',

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Task } from '../../../dashboard/questions/models/task-model';
+import { Task } from '../../../dashboard/tasks/models/task-model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

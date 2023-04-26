@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskAPIService } from './shared/API/taskAPI/task-api.service';
 import { Observable, tap } from 'rxjs';
-import { Task } from './dashboard/questions/models/task-model';
+import { Task } from './dashboard/tasks/models/task-model';
 import { } from 'rxjs/operators'
 import { QuizAPIService } from './shared/API/quizAPI/quiz-api.service';
 import { Quiz } from './dashboard/quizzes/models/quiz-model';
