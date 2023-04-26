@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavigationHorizontalComponent } from './components/navigation-horizontal/navigation-horizontal.component';
 import { RouterModule } from '@angular/router';
 import {TextFieldModule} from '@angular/cdk/text-field';
+import { ClickOutsideModule } from 'ng-click-outside';
+
 
 
 const modules = [
@@ -20,6 +22,7 @@ const modules = [
   FormsModule,
   RouterModule,
   TextFieldModule,
+  ClickOutsideModule,
 ]
 
 const materialModules = [
