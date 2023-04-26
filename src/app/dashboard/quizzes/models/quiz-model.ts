@@ -1,7 +1,7 @@
 import { Task } from "../../tasks/models/task-model";
 
 export interface Quiz {
-  _id?: string;
-  name: string;
-  questions: Task[];
+  name: string,
+  questions: Task[],
+  _id?: string
 }

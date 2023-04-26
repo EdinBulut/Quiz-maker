@@ -1,5 +1,6 @@
 export interface Task {
-  _id?: string;
-  question: string;
-  answer: string;
+  question: string,
+  answer: string,
+  _id?: string,
+  isShowed?: boolean
 }
