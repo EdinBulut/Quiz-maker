@@ -58,7 +58,7 @@ export class CrudQuizDialogComponent implements OnInit {
       this.quiz = Object.assign({}, this.injectedData.quiz)
       this.quiz.questions = this.quiz.questions.map(x => JSON.parse(JSON.stringify(x)))
 
-      this.initialQstnsIDs = [...this.quiz.questions].map(q => q._id)
+      this.initialQstnsIDs = [...this.quiz.questions].flatMap(q => (q?._id as string))
     }
   }
 
@@ -78,14 +78,8 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
-  checkIsCreateDisabled() {
-    return this.isProcessing || !this.quiz.name.trim()
-  }
-
-
-
   createQuiz() {
-    const qIDs: string[] = [...this.quiz.questions].map(q => q._id)
+    const qIDs: string[] = [...this.quiz.questions].map(q => (q?._id as string))
     this.quizAPI.createQuiz({ name: this.quiz.name.trim(), questionIDs: qIDs }).subscribe({
       next: quiz => {
         console.log(quiz)
@@ -115,6 +109,7 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
   isSaveEnabled() {
+    if (this.isProcessing) return false
     const initialName = this.injectedData.quiz?.name?.trim()
     const newName = this.quiz.name.trim()
     if (!newName) return false
@@ -150,21 +145,23 @@ export class CrudQuizDialogComponent implements OnInit {
   
 
 
-  checkIsQuestionAdded(quizID: string) {
-    return !this.quiz.questions.some(q => q._id === quizID)
+  checkIsQuestionAdded(questionID?: string) {
+    if (!questionID) return false
+    return !this.quiz.questions.some(q => q._id === questionID)
   }
 
 
 
   addQuestionIntoQuiz(addedQ: Question) {
     this.quiz.questions.push(addedQ)
-    this.addedQstnsIDs.push(addedQ._id)
+    this.addedQstnsIDs.push((addedQ?._id as string))
     this.removedQstnsIDs = this.removedQstnsIDs.filter(id => id !== addedQ._id)
   }
 
 
 
-  removeQuestionFromQuiz(qID: string) {
+  removeQuestionFromQuiz(qID?: string) {
+    if (!qID) return
     this.quiz.questions = this.quiz.questions.filter(q => q._id !== qID)
     this.addedQstnsIDs = this.addedQstnsIDs.filter(id => id !== qID)
     if (this.initialQstnsIDs.some(x => x === qID)) this.removedQstnsIDs.push(qID)

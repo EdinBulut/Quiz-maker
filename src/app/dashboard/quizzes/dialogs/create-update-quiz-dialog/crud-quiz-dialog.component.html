@@ -35,13 +35,13 @@
                         <p>{{q.answer}}</p>
                       </div>
 
-                      <ng-container *ngIf="checkIsQuestionAdded(q._id) else RemoveBtn">
+                      <ng-container *ngIf="checkIsQuestionAdded(q?._id) else RemoveBtn">
                         <button class="action-button secondary-stroked-button circle-button" matRipple (click)="addQuestionIntoQuiz(q)">
                           <div class="plus-icon action-icon icon-16"></div>
                         </button>
                       </ng-container>
                       <ng-template #RemoveBtn>
-                        <div class="action-button action-button-sm danger-button" (click)="removeQuestionFromQuiz(q._id)">
+                        <div class="action-button action-button-sm danger-button" (click)="removeQuestionFromQuiz(q?._id)">
                           <span>Remove</span>
                         </div>
                       </ng-template>
@@ -75,8 +75,7 @@
         </div>
 
         <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
-          <button class="action-button primary-button" matRipple (click)="createQuiz()" [disabled]="!isSaveEnabled()"
-            [disabled]="checkIsCreateDisabled()">
+          <button class="action-button primary-button" matRipple (click)="createQuiz()" [disabled]="!isSaveEnabled()">
             <p>Create quiz</p>
           </button>
         </ng-container>

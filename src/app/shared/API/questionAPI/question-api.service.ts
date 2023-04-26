@@ -22,15 +22,24 @@ export class QuestionAPIService {
   }
 
 
+
   searchQuestions(searchValue: string): Observable<Question[]> {
     const url = `${this.questionsUrl}/search/${searchValue}`
     return this.http.get<Question[]>(url)
   }
 
 
+
+  updateTask(taskID: string,  updateObj: {question: string, answer: string}): Observable<Question> {
+    const url = `${this.questionsUrl}/${taskID}`;
+    return this.http.put<Question>(url, updateObj, this.httpOptions);
+  }
+
+
   createQuestion(question: Question): Observable<Question> {
     return this.http.post<Question>(this.questionsUrl, question, this.httpOptions);
   }
+
 
 
   deleteQuestion(questionID: string): Observable<Question> {
