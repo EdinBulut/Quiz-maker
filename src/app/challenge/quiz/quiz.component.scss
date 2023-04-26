@@ -1,0 +1,13 @@
+.action-button {
+    min-width: 220px;
+    flex-grow: unset;
+}
+
+.action-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 8px;
+    flex-wrap: wrap;
+}

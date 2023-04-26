@@ -23,20 +23,8 @@ export class AppComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.questions$ = this.questionsService.getTasks()
-    .pipe(
-      tap(data => console.log('questions', data))
-    )
-    this.quizes$ = this.quizAPI.getQuizzes()
-    .pipe(
-      tap(quizes => console.log(quizes))
-    )
-    
-    this.quizAPI.searchQuizzes('TEST')
-    .subscribe(
-      {next: (data) => console.log('searched quizzes', data), 
-      error: (err) => console.error(err)}
-      )
+
+
   }
 
   createQuiz() {

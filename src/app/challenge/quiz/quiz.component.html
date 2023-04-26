@@ -1,1 +1,28 @@
-<router-outlet></router-outlet>
+<div class="d-flex fd-column ai-center jc-center h-100 w-100 gap-24 ">
+  <ng-container *ngIf="quiz">
+
+    <div class="d-flex fd-column jc-center ai-center f-grow-1 w-100 gap-16">
+        <div class="d-flex fd-column ai-center jc-center">
+            <h1>{{quiz.name}}</h1>
+            <h4 class="secondary-text">This quiz has {{quiz.questions.length}} questions</h4>
+        </div>
+        <button class="action-button primary-button" matRipple (click)="playQuiz()" [disabled]="!quiz.questions.length">
+            <p>Play quiz</p>
+        </button>
+    </div>
+
+
+    <div class="action-button-wrapper">
+      <button class="action-button primary-stroked-button" matRipple (click)="playQuiz()"
+        [disabled]="!quiz.questions.length">
+        <p>Prev</p>
+      </button>
+      <button class="action-button primary-button" matRipple (click)="playQuiz()" [disabled]="!quiz.questions.length">
+        <p>Next</p>
+      </button>
+    </div>
+
+
+    <router-outlet></router-outlet>
+  </ng-container>
+</div>

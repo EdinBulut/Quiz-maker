@@ -50,6 +50,17 @@
   align-items: baseline;
 }
 
+.js-start {
+  justify-self: flex-start !important;
+}
+
+.js-end {
+  justify-self: flex-end;
+}
+
+.js-center {
+  justify-self: center;
+}
 .as-start {
   align-self: flex-start !important;
 }

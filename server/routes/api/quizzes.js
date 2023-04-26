@@ -39,9 +39,9 @@ router.get('/search/:searchValue', (req, res) => {
 
 
 router.get('/:id', (req, res) => {
-  Quiz.findById(req.params.id)
+  Quiz.findById(req.params.id).populate('questions')
     .then(question => res.json(question))
-    .catch(err => console.log(err.message))
+    .catch(err => res.status(404).json({message: err.message}))
 })
 
 

@@ -41,7 +41,7 @@ router.get('/search/:searchValue', (req, res) => {
 router.get('/:id', (req, res) => {
   Question.findById(req.params.id)
     .then(question => res.json(question))
-    .catch(err => console.log(err.message))
+    .catch(err => res.status(404).json({message: err.message}))
 })
 
 
