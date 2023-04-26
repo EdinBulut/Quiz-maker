@@ -23,7 +23,11 @@ router.get('/', (req, res) => {
 
 router.get('/search/:searchValue', (req, res) => {
   const searchValue = req.params.searchValue.toLowerCase()
-  Quiz.find({name: { $regex: new RegExp(searchValue, "i") }}).populate("questions")
+  Quiz.find({
+      name: {
+        $regex: new RegExp(searchValue, "i")
+      }
+    }).populate("questions")
     .then(quizzes => {
       res.json(quizzes);
     })
@@ -53,10 +57,13 @@ router.post('/', (req, res) => {
     questions: questionsIDs
   }
 
-  const question = new Quiz(createQuizObj);
-  question.save()
-    .then(insertedQuiz => res.json(insertedQuiz))
-    .catch(err => res.json({message: err}))
+  const quiz = new Quiz(createQuizObj);
+  quiz.save()
+    .then(insertedQuiz => Quiz.findById(insertedQuiz._id).populate('questions'))
+    .then(populatedQuiz => res.json(populatedQuiz))
+    .catch(err => res.json({
+      message: err
+    }))
 })
 
 
@@ -94,7 +101,9 @@ router.put('/:quizID/remove/questions', async (req, res) => {
     const quiz = await Quiz.findById(quizID);
 
     if (!quiz) {
-      res.status(404).json({ message: `Couldnt find quiz with ID: ${quizID}` })
+      res.status(404).json({
+        message: `Couldnt find quiz with ID: ${quizID}`
+      })
       return
     }
 
@@ -119,6 +128,8 @@ router.put('/:quizID/remove/questions', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+
 
 
 
