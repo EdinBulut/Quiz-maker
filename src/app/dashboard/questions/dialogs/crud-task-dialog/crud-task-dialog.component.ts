@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { QuestionAPIService } from 'src/app/shared/API/questionAPI/question-api.service';
+import { QuestionAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
 import { Crud } from 'src/app/shared/models/crud.enum';
 import { Task } from '../../models/question-model';
 

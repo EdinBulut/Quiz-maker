@@ -4,7 +4,7 @@ import { Quiz } from '../../models/quiz-model';
 import { Crud } from 'src/app/shared/models/crud.enum';
 import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 import { Observable, debounceTime, fromEvent, map, tap } from 'rxjs';
-import { QuestionAPIService } from 'src/app/shared/API/questionAPI/question-api.service';
+import { QuestionAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
 import { Task } from 'src/app/dashboard/questions/models/question-model';
 
 @Component({

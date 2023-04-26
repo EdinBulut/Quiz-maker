@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { QuizzesComponent } from './quizzes/quizzes.component';
-import { QuestionsComponent } from './questions/questions.component';
+import { TasksComponent } from './questions/tasks.component';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
       path: 'quizzes', component: QuizzesComponent
     },
     {
-      path: 'questions', component: QuestionsComponent
+      path: 'questions', component: TasksComponent
     },
   ]
 },

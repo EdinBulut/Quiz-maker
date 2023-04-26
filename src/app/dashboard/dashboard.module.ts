@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard.component';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { QuizzesComponent } from './quizzes/quizzes.component';
-import { QuestionsComponent } from './questions/questions.component';
+import { TasksComponent } from './questions/tasks.component';
 import { CrudQuizDialogComponent } from './quizzes/dialogs/create-update-quiz-dialog/crud-quiz-dialog.component';
 import { CrudTaskDialogComponent } from './questions/dialogs/crud-task-dialog/crud-task-dialog.component';
 
@@ -14,7 +14,7 @@ import { CrudTaskDialogComponent } from './questions/dialogs/crud-task-dialog/cr
   declarations: [
     DashboardComponent,
     QuizzesComponent,
-    QuestionsComponent,
+    TasksComponent,
     CrudQuizDialogComponent,
     CrudTaskDialogComponent
   ],
