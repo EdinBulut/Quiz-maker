@@ -41,21 +41,21 @@ export class QuizAPIService {
 
 
   //UPDATE START
-  updateQuiz(quizID: string,  updateObj: {name?: string, addQuestions?: string[], removeQuestions?: string[]}): Observable<any> {
+  updateQuiz(quizID: string,  updateObj: {name?: string, addTasks?: string[], removeTasks?: string[]}): Observable<any> {
     const url = `${this.quizzesUrl}/${quizID}`;
     return this.http.put(url, updateObj, this.httpOptions);
   }
 
 
-  insertQuestionIntoQuiz(insertQuestionObj: {quizID: string, questionID: string}): Observable<any> {
-    const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/add/questions/${insertQuestionObj.questionID}`;
-    return this.http.put(url, insertQuestionObj, this.httpOptions);
+  insertTaskIntoQuiz(insertTaskObj: {quizID: string, questionID: string}): Observable<any> {
+    const url = `${this.quizzesUrl}/${insertTaskObj.quizID}/add/questions/${insertTaskObj.questionID}`;
+    return this.http.put(url, insertTaskObj, this.httpOptions);
   }
 
   
-  removeQuestionFromQuiz(insertQuestionObj: {quizID: string, questionIDs: string[]}): Observable<any> {
-    const url = `${this.quizzesUrl}/${insertQuestionObj.quizID}/remove/questions`;
-    return this.http.put(url, insertQuestionObj, this.httpOptions);
+  removeTaskFromQuiz(insertTaskObj: {quizID: string, questionIDs: string[]}): Observable<any> {
+    const url = `${this.quizzesUrl}/${insertTaskObj.quizID}/remove/questions`;
+    return this.http.put(url, insertTaskObj, this.httpOptions);
   }
   //UPDATE END
 

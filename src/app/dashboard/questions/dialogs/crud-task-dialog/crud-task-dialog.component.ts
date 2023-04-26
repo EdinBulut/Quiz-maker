@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { QuestionAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
+import { TaskAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
 import { Crud } from 'src/app/shared/models/crud.enum';
-import { Task } from '../../models/question-model';
+import { Task } from '../../models/task-model';
 
 @Component({
   selector: 'app-crud-question-dialog',
@@ -26,7 +26,7 @@ export class CrudTaskDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public injectedData: { CRUD: Crud, task?: Task },
     private matDialogRef: MatDialogRef<CrudTaskDialogComponent>,
-    private taskAPI: QuestionAPIService,
+    private taskAPI: TaskAPIService,
   ) { }
 
 
@@ -62,9 +62,9 @@ export class CrudTaskDialogComponent implements OnInit {
   isSaveEnabled() {
     if (this.isProcessing) return false
     const {question, answer} = this.task
-    const initialQuestion = this.injectedData.task?.question?.trim()
+    const initialTask = this.injectedData.task?.question?.trim()
     if (!question) return
-    const isNameChanged = initialQuestion !== question
+    const isNameChanged = initialTask !== question
     if (isNameChanged) return true
     const initialAnswer = this.injectedData.task?.question?.trim()
     if (!answer) return
@@ -75,7 +75,7 @@ export class CrudTaskDialogComponent implements OnInit {
 
 
   createTask() {
-    this.taskAPI.createQuestion({ question: this.task.question, answer: this.task.answer}).subscribe({
+    this.taskAPI.createTask({ question: this.task.question, answer: this.task.answer}).subscribe({
       next: task => {
         console.log(task)
         this.closeDialogWithData(task)

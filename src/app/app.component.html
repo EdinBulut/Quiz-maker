@@ -2,7 +2,7 @@
 
 
 
-<!-- <ng-container *ngIf="(questions$ | async) as questions; else loadingQuestions">
+<!-- <ng-container *ngIf="(questions$ | async) as questions; else loadingTasks">
 
   <div *ngFor="let question of questions">
       {{question.question}} : {{question.answer}}
@@ -16,11 +16,11 @@
   <button (click)="deleteQuiz()">Delete quiz</button>
   <button (click)="updateQuiz()">Update quiz</button>
   <br>
-  <button (click)="insertQuestionIntoQuiz()">Insert question into quiz</button>
-  <button (click)="removeQuestionFromQuiz()">Remove question from quiz</button>
+  <button (click)="insertTaskIntoQuiz()">Insert question into quiz</button>
+  <button (click)="removeTaskFromQuiz()">Remove question from quiz</button>
   <br>
-  <button (click)="deleteQuestion()">Delete question</button>
+  <button (click)="deleteTask()">Delete question</button>
 </ng-container>
-<ng-template #loadingQuestions>
+<ng-template #loadingTasks>
   loading..
 </ng-template> -->

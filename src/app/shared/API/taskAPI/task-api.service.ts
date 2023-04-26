@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Task } from '../../../dashboard/questions/models/question-model';
+import { Task } from '../../../dashboard/questions/models/task-model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuestionAPIService {
+export class TaskAPIService {
 
   // private questionsUrl = '/questions';
   private questionsUrl = `${environment.baseURL}/questions`
@@ -16,14 +16,14 @@ export class QuestionAPIService {
   constructor(private http: HttpClient) { }
 
 
-  getQuestions(searchValue?: string): Observable<Task[]> {
+  getTasks(searchValue?: string): Observable<Task[]> {
     const url = searchValue ? `${this.questionsUrl}/search/${searchValue}` : this.questionsUrl 
     return this.http.get<Task[]>(url)
   }
 
 
 
-  searchQuestions(searchValue: string): Observable<Task[]> {
+  searchTasks(searchValue: string): Observable<Task[]> {
     const url = `${this.questionsUrl}/search/${searchValue}`
     return this.http.get<Task[]>(url)
   }
@@ -36,13 +36,13 @@ export class QuestionAPIService {
   }
 
 
-  createQuestion(question: Task): Observable<Task> {
+  createTask(question: Task): Observable<Task> {
     return this.http.post<Task>(this.questionsUrl, question, this.httpOptions);
   }
 
 
 
-  deleteQuestion(questionID: string): Observable<Task> {
+  deleteTask(questionID: string): Observable<Task> {
     const url = `${this.questionsUrl}/${questionID}`
     return this.http.delete<Task>(url, this.httpOptions)
   }

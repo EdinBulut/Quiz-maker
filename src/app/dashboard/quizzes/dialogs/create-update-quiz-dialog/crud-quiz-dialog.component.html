@@ -21,9 +21,9 @@
 
         <div class="input-wrapper" [class.focused-input-wrapper]="isSearchInFocus">
           <div class="icon-20 search-icon prefix"></div>
-          <input type="text" placeholder="Search existing questions" #searchQuestion
+          <input type="text" placeholder="Search existing questions" #searchTask
             (focus)="isSearchInFocus=true; showDropdown = true" (clickOutside)="showDropdown = false"
-            (blur)="isSearchInFocus=false" [(ngModel)]="searchQuestionsInput">
+            (blur)="isSearchInFocus=false" [(ngModel)]="searchTasksInput">
           <ng-container *ngIf="(questions$ | async) as questions">
             <div class="dropdown-list-wrapper" [class.show-dropdown-list]="showDropdown">
               <ul class="dropdown-list" *ngIf="questions.length else noResults">
@@ -35,13 +35,13 @@
                         <p>{{q.answer}}</p>
                       </div>
 
-                      <ng-container *ngIf="checkIsQuestionAdded(q?._id) else RemoveBtn">
-                        <button class="action-button secondary-stroked-button circle-button" matRipple (click)="addQuestionIntoQuiz(q)">
+                      <ng-container *ngIf="checkIsTaskAdded(q?._id) else RemoveBtn">
+                        <button class="action-button secondary-stroked-button circle-button" matRipple (click)="addTaskIntoQuiz(q)">
                           <div class="plus-icon action-icon icon-16"></div>
                         </button>
                       </ng-container>
                       <ng-template #RemoveBtn>
-                        <div class="action-button action-button-sm danger-button" (click)="removeQuestionFromQuiz(q?._id)">
+                        <div class="action-button action-button-sm danger-button" (click)="removeTaskFromQuiz(q?._id)">
                           <span>Remove</span>
                         </div>
                       </ng-template>
@@ -51,7 +51,7 @@
                 </ng-container>
               </ul>
               <ng-template #noResults>
-                <p class="p-16">No results for <strong>{{searchQuestionsInput}}</strong></p>
+                <p class="p-16">No results for <strong>{{searchTasksInput}}</strong></p>
               </ng-template>
               
             </div>
@@ -66,7 +66,7 @@
                   <p class="secondary-text">{{item.answer}}</p>
                 </div>
 
-                <div class="action-button action-button-sm danger-stroked-button as-center" (click)="removeQuestionFromQuiz(item._id)">
+                <div class="action-button action-button-sm danger-stroked-button as-center" (click)="removeTaskFromQuiz(item._id)">
                   <span>Remove</span>
                 </div>
               </div>

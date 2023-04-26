@@ -4,8 +4,8 @@ import { Quiz } from '../../models/quiz-model';
 import { Crud } from 'src/app/shared/models/crud.enum';
 import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 import { Observable, debounceTime, fromEvent, map, tap } from 'rxjs';
-import { QuestionAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
-import { Task } from 'src/app/dashboard/questions/models/question-model';
+import { TaskAPIService } from 'src/app/shared/API/taskAPI/task-api.service';
+import { Task } from 'src/app/dashboard/questions/models/task-model';
 
 @Component({
   selector: 'app-create-update-quiz-dialog',
@@ -31,8 +31,8 @@ export class CrudQuizDialogComponent implements OnInit {
   removedQstnsIDs: string[] = []
 
 
-  @ViewChild('searchQuestion') searchQuestion!: ElementRef<HTMLInputElement>;
-  searchQuestionsInput = ''
+  @ViewChild('searchTask') searchTask!: ElementRef<HTMLInputElement>;
+  searchTasksInput = ''
   questions$!: Observable<Task[]>
   showDropdown = true
 
@@ -41,14 +41,14 @@ export class CrudQuizDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public injectedData: { CRUD: Crud, quiz?: Quiz },
     private matDialogRef: MatDialogRef<CrudQuizDialogComponent>,
     private quizAPI: QuizAPIService,
-    private questionAPI: QuestionAPIService,
+    private questionAPI: TaskAPIService,
   ) { }
 
 
 
   ngOnInit(): void {
     this.initialSettings()
-    this.searchQuestionsTrigger()
+    this.searchTasksTrigger()
   }
 
 
@@ -97,7 +97,7 @@ export class CrudQuizDialogComponent implements OnInit {
     console.log('added', this.addedQstnsIDs)
     console.log('init', this.initialQstnsIDs)
 
-    this.quizAPI.updateQuiz(this.quiz._id, { name: this.quiz.name.trim(), addQuestions: this.addedQstnsIDs, removeQuestions: this.removedQstnsIDs }).subscribe({
+    this.quizAPI.updateQuiz(this.quiz._id, { name: this.quiz.name.trim(), addTasks: this.addedQstnsIDs, removeTasks: this.removedQstnsIDs }).subscribe({
       next: quiz => {
         console.log(quiz)
         this.closeDialogWithData(quiz)
@@ -124,20 +124,20 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
-  searchQuestionsTrigger() {
+  searchTasksTrigger() {
     setTimeout(() => {
-      fromEvent(this.searchQuestion.nativeElement, 'keyup').pipe(
+      fromEvent(this.searchTask.nativeElement, 'keyup').pipe(
         map((event: any) => event.target.value),
         debounceTime(600),
-        tap(value => this.searchExistingQuestions(value))
+        tap(value => this.searchExistingTasks(value))
       ).subscribe()
     }, 0)
   }
 
 
 
-  searchExistingQuestions(searchValue: string) {
-    this.questions$ = this.questionAPI.searchQuestions(searchValue).pipe(
+  searchExistingTasks(searchValue: string) {
+    this.questions$ = this.questionAPI.searchTasks(searchValue).pipe(
       map(questions => questions.filter(q => !this.quiz.questions.some(x => x._id === q._id))),
       tap(data => console.log(data))
     )
@@ -145,14 +145,14 @@ export class CrudQuizDialogComponent implements OnInit {
   
 
 
-  checkIsQuestionAdded(questionID?: string) {
+  checkIsTaskAdded(questionID?: string) {
     if (!questionID) return false
     return !this.quiz.questions.some(q => q._id === questionID)
   }
 
 
 
-  addQuestionIntoQuiz(addedQ: Task) {
+  addTaskIntoQuiz(addedQ: Task) {
     this.quiz.questions.push(addedQ)
     this.addedQstnsIDs.push((addedQ?._id as string))
     this.removedQstnsIDs = this.removedQstnsIDs.filter(id => id !== addedQ._id)
@@ -160,7 +160,7 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
-  removeQuestionFromQuiz(qID?: string) {
+  removeTaskFromQuiz(qID?: string) {
     if (!qID) return
     this.quiz.questions = this.quiz.questions.filter(q => q._id !== qID)
     this.addedQstnsIDs = this.addedQstnsIDs.filter(id => id !== qID)

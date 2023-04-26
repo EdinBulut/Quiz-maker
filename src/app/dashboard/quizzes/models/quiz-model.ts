@@ -1,4 +1,4 @@
-import { Task } from "../../questions/models/question-model";
+import { Task } from "../../questions/models/task-model";
 
 export interface Quiz {
   _id?: string;
