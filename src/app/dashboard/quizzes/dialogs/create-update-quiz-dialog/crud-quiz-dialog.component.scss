@@ -13,7 +13,7 @@
 
 
 .input-wrapper:not(.focused-input-wrapper) {
-  border-color: var(--primary-0);
+  border-color: var(--primary-3);
 
   .search-icon {
     background-color: var(--primary-0);
@@ -36,4 +36,31 @@
       background: var(--primary-0)
     }
   }
+}
+
+
+.questions-wrapper {
+  height: 42vh;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 2px;
+    background-color: var(--primary-0);
+
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: var(--primary-3);
+  }
+  ::-webkit-scrollbar-track {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 100vh;
+    background-color: var(--primary-0);
+  }
+}
+
+ul {
+  background: rgba(0,0,0,0.12);
 }
