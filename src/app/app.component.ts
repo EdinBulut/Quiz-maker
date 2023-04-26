@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionAPIService } from './shared/API/questionAPI/question-api.service';
 import { Observable, tap } from 'rxjs';
-import { Question } from './dashboard/questions/models/question-model';
+import { Task } from './dashboard/questions/models/question-model';
 import { } from 'rxjs/operators'
 import { QuizAPIService } from './shared/API/quizAPI/quiz-api.service';
 import { Quiz } from './dashboard/quizzes/models/quiz-model';
@@ -14,7 +14,7 @@ import { Quiz } from './dashboard/quizzes/models/quiz-model';
 })
 export class AppComponent implements OnInit{
   title = 'Quiz-maker';
-  questions$!: Observable<Question[]>
+  questions$!: Observable<Task[]>
   quizes$!: Observable<Quiz[]>
   constructor(
     private questionsService: QuestionAPIService,

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuestionAPIService } from 'src/app/shared/API/questionAPI/question-api.service';
 import { Crud } from 'src/app/shared/models/crud.enum';
-import { Question } from '../../models/question-model';
+import { Task } from '../../models/question-model';
 
 @Component({
   selector: 'app-crud-question-dialog',
@@ -17,14 +17,14 @@ export class CrudTaskDialogComponent implements OnInit {
 
 
   CRUD = Crud 
-  task: Question = {
+  task: Task = {
     question: '',
     answer: ''
   }
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public injectedData: { CRUD: Crud, task?: Question },
+    @Inject(MAT_DIALOG_DATA) public injectedData: { CRUD: Crud, task?: Task },
     private matDialogRef: MatDialogRef<CrudTaskDialogComponent>,
     private taskAPI: QuestionAPIService,
   ) { }
@@ -52,7 +52,7 @@ export class CrudTaskDialogComponent implements OnInit {
 
 
 
-  closeDialogWithData(createdTask: Question) {
+  closeDialogWithData(createdTask: Task) {
     this.isClosed = true
     this.matDialogRef.close(createdTask)
   }

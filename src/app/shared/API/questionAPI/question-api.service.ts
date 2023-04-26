@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Question } from '../../../dashboard/questions/models/question-model';
+import { Task } from '../../../dashboard/questions/models/question-model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -16,35 +16,35 @@ export class QuestionAPIService {
   constructor(private http: HttpClient) { }
 
 
-  getQuestions(searchValue?: string): Observable<Question[]> {
+  getQuestions(searchValue?: string): Observable<Task[]> {
     const url = searchValue ? `${this.questionsUrl}/search/${searchValue}` : this.questionsUrl 
-    return this.http.get<Question[]>(url)
+    return this.http.get<Task[]>(url)
   }
 
 
 
-  searchQuestions(searchValue: string): Observable<Question[]> {
+  searchQuestions(searchValue: string): Observable<Task[]> {
     const url = `${this.questionsUrl}/search/${searchValue}`
-    return this.http.get<Question[]>(url)
+    return this.http.get<Task[]>(url)
   }
 
 
 
-  updateTask(taskID: string,  updateObj: {question: string, answer: string}): Observable<Question> {
+  updateTask(taskID: string,  updateObj: {question: string, answer: string}): Observable<Task> {
     const url = `${this.questionsUrl}/${taskID}`;
-    return this.http.put<Question>(url, updateObj, this.httpOptions);
+    return this.http.put<Task>(url, updateObj, this.httpOptions);
   }
 
 
-  createQuestion(question: Question): Observable<Question> {
-    return this.http.post<Question>(this.questionsUrl, question, this.httpOptions);
+  createQuestion(question: Task): Observable<Task> {
+    return this.http.post<Task>(this.questionsUrl, question, this.httpOptions);
   }
 
 
 
-  deleteQuestion(questionID: string): Observable<Question> {
+  deleteQuestion(questionID: string): Observable<Task> {
     const url = `${this.questionsUrl}/${questionID}`
-    return this.http.delete<Question>(url, this.httpOptions)
+    return this.http.delete<Task>(url, this.httpOptions)
   }
 
 }

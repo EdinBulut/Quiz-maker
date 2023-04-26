@@ -5,7 +5,7 @@ import { Crud } from 'src/app/shared/models/crud.enum';
 import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 import { Observable, debounceTime, fromEvent, map, tap } from 'rxjs';
 import { QuestionAPIService } from 'src/app/shared/API/questionAPI/question-api.service';
-import { Question } from 'src/app/dashboard/questions/models/question-model';
+import { Task } from 'src/app/dashboard/questions/models/question-model';
 
 @Component({
   selector: 'app-create-update-quiz-dialog',
@@ -33,7 +33,7 @@ export class CrudQuizDialogComponent implements OnInit {
 
   @ViewChild('searchQuestion') searchQuestion!: ElementRef<HTMLInputElement>;
   searchQuestionsInput = ''
-  questions$!: Observable<Question[]>
+  questions$!: Observable<Task[]>
   showDropdown = true
 
 
@@ -152,7 +152,7 @@ export class CrudQuizDialogComponent implements OnInit {
 
 
 
-  addQuestionIntoQuiz(addedQ: Question) {
+  addQuestionIntoQuiz(addedQ: Task) {
     this.quiz.questions.push(addedQ)
     this.addedQstnsIDs.push((addedQ?._id as string))
     this.removedQstnsIDs = this.removedQstnsIDs.filter(id => id !== addedQ._id)
