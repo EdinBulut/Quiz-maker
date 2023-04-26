@@ -147,7 +147,8 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  confirmDeleteQuizData(quizName: string) {
+  confirmDeleteQuizData(quizName: string) { 
+    // will be moved into dialog-settings service later
     const messageTxt = `Are you sure you want to delete quiz <strong>${quizName}</strong>?`
     const dialogVariables: DialogVariables = {
       title: 'Delete quiz',
@@ -167,7 +168,8 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  createUpdateDialogSettings(CRUD: Crud, quiz?: Quiz) {
+  createUpdateDialogSettings(CRUD: Crud, quiz?: Quiz) { 
+    // will be moved into dialog-settings service later
     const settings = {
       width: '100%',
       maxWidth: '456px',
@@ -180,7 +182,8 @@ export class QuizzesComponent implements OnInit {
   }
 
 
-  deleteQuizSettings(quizName: string) {
+  deleteQuizSettings(quizName: string) { 
+    // will be moved into dialog-settings service later
     const settings = {
       width: '100%',
       maxWidth: '456px',
@@ -194,7 +197,8 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  snackBarTrigger(message: string) {
+  snackBarTrigger(message: string) { 
+    // will be moved into snackbar service later
     this.snackBar.open(message, '', {
       horizontalPosition: 'center',
       duration: 3000
