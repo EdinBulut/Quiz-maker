@@ -62,6 +62,15 @@
   margin: 0;
 }
 
+.icon-128 {
+  cursor: pointer;
+  width: 128px;
+  min-width: 128px;
+  height: 128px;
+  position: relative;
+  margin: 0;
+}
+
 .primary-icon {
   background: var(--primary-3);
   &:hover {
@@ -124,4 +133,9 @@
 .x-in-circle-icon {
   -webkit-mask: url('~src/assets/images/svg/x-in-circle-icon.svg') no-repeat;
   mask: url('~src/assets/images/svg/x-in-circle-icon.svg') no-repeat;
+}
+
+.quiz-text-icon {
+  -webkit-mask: url('~src/assets/images/svg/quiz-text-icon.svg') no-repeat;
+  mask: url('~src/assets/images/svg/quiz-text-icon.svg') no-repeat;
 }

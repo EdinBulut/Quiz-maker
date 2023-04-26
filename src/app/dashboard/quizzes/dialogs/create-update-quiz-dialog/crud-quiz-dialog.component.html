@@ -63,7 +63,7 @@
           </ng-container>
         </div>
         <div class="questions-wrapper">
-          <ul *ngIf="quiz.questions?.length">
+          <ul *ngIf="quiz.questions?.length else blankField">
             <li *ngFor="let item of quiz.questions">
               <div class="d-flex jc-between gap-12">
                 <div class="d-flex fd-column gap-4">
@@ -77,6 +77,11 @@
               </div>
             </li>
           </ul>
+          <ng-template #blankField>
+            <div class="d-flex jc-center ai-center w-100 h-100">
+              <div class="primary-icon quiz-text-icon icon-128"></div>
+            </div>
+          </ng-template>
         </div>
 
         <ng-container *ngIf="injectedData.CRUD === CRUD.CREATE else updateQuizBtn">
