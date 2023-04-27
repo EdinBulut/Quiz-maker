@@ -2,7 +2,7 @@
   <div class="white-icon quiz-text-icon icon-64 "></div>
 
   <ng-container *ngIf="quiz">
-    <div class="d-flex fd-column jc-center ai-center f-grow-1 w-100 gap-16">
+    <div class="d-flex fd-column jc-center ai-center f-grow-1 w-100 gap-32">
       <ng-container *ngIf="!selectedTask else taskContainer">
         <div class="d-flex fd-column ai-center jc-center">
           <h1>{{quiz.name}}</h1>
@@ -31,7 +31,10 @@
         <p>Next</p>
       </button>
     </div>
-
-
   </ng-container>
+  <ng-template #somethingWentWrong>
+    <h2 class="ta-center">Something went wrong...</h2>
+    <p class="secondary-text">Incorrect quiz link or link is not valid.</p>
+  </ng-template>
+  
 </div>
