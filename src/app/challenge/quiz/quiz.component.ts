@@ -49,8 +49,6 @@ export class QuizComponent implements OnInit {
             return Object.assign({ isAnswerVisible: false }, q)
           })
           this.quiz = quiz
-          console.log(quiz);
-
         },
         error: err => console.error(err)
       })
@@ -72,7 +70,6 @@ export class QuizComponent implements OnInit {
 
 
   onNextBtn() {
-    console.log('next', this.currentIndex)
     if (this.isNextDisabled()) return
     this.currentIndex++
   }

@@ -46,7 +46,7 @@ export class QuizzesComponent implements OnInit {
       .pipe(
         delay(300),
         map(quizzes => quizzes.sort((q1, q2) => q1?.name?.toLowerCase() < q2?.name?.toLowerCase() ? -1 : 1)),
-        tap(quizes => console.log(quizes)),
+        // tap(quizes => console.log(quizes)),
         shareReplay(1)
       )
   }
@@ -147,7 +147,7 @@ export class QuizzesComponent implements OnInit {
           })
         )
       },
-      error: err => console.log(err)
+      error: err => console.error(err)
     })
   }
 

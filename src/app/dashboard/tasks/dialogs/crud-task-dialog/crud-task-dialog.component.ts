@@ -76,7 +76,6 @@ export class CrudTaskDialogComponent implements OnInit {
   createTask() {
     this.taskAPI.createTask({ question: this.task.question, answer: this.task.answer}).subscribe({
       next: task => {
-        console.log(task)
         this.closeDialogWithData(task)
       },
       error: err => console.error(err)
@@ -89,7 +88,6 @@ export class CrudTaskDialogComponent implements OnInit {
 
     this.taskAPI.updateTask(this.task._id, { question: this.task.question, answer: this.task.answer}).subscribe({
       next: task => {
-        console.log(task)
         this.closeDialogWithData(task)
       },
       error: err => console.error(err)

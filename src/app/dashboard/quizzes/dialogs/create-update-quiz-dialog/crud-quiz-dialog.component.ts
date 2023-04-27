@@ -87,7 +87,6 @@ export class CrudQuizDialogComponent implements OnInit {
     const qIDs: string[] = [...this.quiz.questions].map(q => (q?._id as string))
     this.quizAPI.createQuiz({ name: this.quiz.name.trim(), questionIDs: qIDs }).subscribe({
       next: quiz => {
-        console.log(quiz)
         this.closeDialogWithData(quiz)
       },
       error: err => console.error(err)
@@ -99,12 +98,9 @@ export class CrudQuizDialogComponent implements OnInit {
   updateQuiz() {
     if (!this.quiz._id) return
     this.addedQstnsIDs = this.addedQstnsIDs.filter(qID => !this.initialQstnsIDs.some(x => x === qID))
-    console.log('added', this.addedQstnsIDs)
-    console.log('init', this.initialQstnsIDs)
 
     this.quizAPI.updateQuiz(this.quiz._id, { name: this.quiz.name.trim(), addTasks: this.addedQstnsIDs, removeTasks: this.removedQstnsIDs }).subscribe({
       next: quiz => {
-        console.log(quiz)
         this.closeDialogWithData(quiz)
       },
       error: err => console.error(err)
