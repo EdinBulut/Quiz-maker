@@ -53,6 +53,12 @@ export class QuizzesComponent implements OnInit {
 
 
 
+  playQuiz(quizID: string) {
+    this.router.navigate(['challenge', quizID])
+  }
+
+
+
   createQuiz() {
     const dialogRef = this.dialog.open(CrudQuizDialogComponent, this.createUpdateDialogSettings(Crud.CREATE))
     dialogRef.afterClosed().subscribe({
@@ -147,7 +153,7 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  confirmDeleteQuizData(quizName: string) { 
+  confirmDeleteQuizData(quizName: string) {
     // will be moved into dialog-settings service later
     const messageTxt = `Are you sure you want to delete quiz <strong>${quizName}</strong>?`
     const dialogVariables: DialogVariables = {
@@ -168,7 +174,7 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  createUpdateDialogSettings(CRUD: Crud, quiz?: Quiz) { 
+  createUpdateDialogSettings(CRUD: Crud, quiz?: Quiz) {
     // will be moved into dialog-settings service later
     const settings = {
       width: '100%',
@@ -182,7 +188,7 @@ export class QuizzesComponent implements OnInit {
   }
 
 
-  deleteQuizSettings(quizName: string) { 
+  deleteQuizSettings(quizName: string) {
     // will be moved into dialog-settings service later
     const settings = {
       width: '100%',
@@ -197,7 +203,7 @@ export class QuizzesComponent implements OnInit {
 
 
 
-  snackBarTrigger(message: string) { 
+  snackBarTrigger(message: string) {
     // will be moved into snackbar service later
     this.snackBar.open(message, '', {
       horizontalPosition: 'center',

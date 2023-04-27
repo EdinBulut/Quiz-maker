@@ -25,7 +25,7 @@
                 {{quiz.questions?.length > 1 ? 'questions' : 'question'}}</p>
             </div>
             <div class="d-flex jc-center ai-center gap-12">
-              <div class="primary-icon play-icon icon-16"></div>
+              <div class="primary-icon play-icon icon-16" (click)="$event.stopPropagation(); playQuiz(quiz._id)"></div>
               <div class="danger-icon trash-icon icon-16" (click)="$event.stopPropagation(); deleteQuiz(quiz)"></div>
             </div>
           </div>
