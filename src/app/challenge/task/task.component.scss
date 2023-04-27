@@ -1,0 +1,9 @@
+.answer-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: 2s all ease .6s;
+}
+
+.visible-answer-container {
+    max-height: 100vh;
+}

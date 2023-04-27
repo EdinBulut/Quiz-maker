@@ -13,4 +13,13 @@ export class TaskComponent {
   constructor(
   ) { }
 
+
+
+
+  showAnswer() {
+    this.task.isAnswerVisible = true
+  }
+
+
+  
 }

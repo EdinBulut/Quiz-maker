@@ -1,10 +1,12 @@
-<div class="d-flex fd-column ai-center jc-center gap-24">
-    <h1>
-        {{task.question}}
-    </h1>
+<div class="d-flex fd-column ai-center jc-center">
     
-    <h3>
-        {{task.answer}}
-    </h3>
-
+    <div class="d-flex fd-column ai-center jc-center gap-24">
+        <h1> {{task.question}}</h1>
+        <div class="answer-container" [class.visible-answer-container]="task.isAnswerVisible">
+            <h3> {{task.answer}}</h3>
+        </div>
+    </div>
+    <button class="action-button primary-button x" matRipple (click)="showAnswer()" [style.visibility]="task.isAnswerVisible ? 'hidden': 'visible'">
+        <p>Show answer</p>
+    </button>
 </div>
