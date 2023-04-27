@@ -7,3 +7,13 @@
 .visible-answer-container {
     max-height: 100vh;
 }
+
+.wrapper {
+    max-width: 720px;
+}
+
+.collapsed-button {
+    visibility: hidden;
+    max-height: 0;
+    overflow: hidden;
+}
