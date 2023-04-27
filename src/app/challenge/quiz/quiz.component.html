@@ -1,10 +1,13 @@
 <div class="d-flex fd-column ai-center jc-center h-min-100vh w-100 gap-24 ">
+  <div class="white-icon quiz-text-icon icon-64 "></div>
+
   <ng-container *ngIf="quiz">
     <div class="d-flex fd-column jc-center ai-center f-grow-1 w-100 gap-16">
       <ng-container *ngIf="!selectedTask else taskContainer">
         <div class="d-flex fd-column ai-center jc-center">
           <h1>{{quiz.name}}</h1>
-          <h4 class="secondary-text">This quiz has {{quiz.questions.length}} questions</h4>
+          <h4 class="secondary-text">This quiz has {{quiz.questions.length}}
+            {{quiz.questions.length > 1 ?'questions': 'question'}}</h4>
         </div>
         <button class="action-button primary-button" matRipple (click)="playQuiz()" [disabled]="!quiz.questions.length">
           <p>Play quiz</p>
@@ -20,12 +23,11 @@
     </div>
 
     <div class="action-button-wrapper" *ngIf="selectedTask">
-      <button (click)="onPrevBtn()" [disabled]="isPrevDisabled()"
-      class="action-button primary-stroked-button" matRipple>
+      <button (click)="onPrevBtn()" [disabled]="isPrevDisabled()" class="action-button primary-stroked-button"
+        matRipple>
         <p>Prev</p>
       </button>
-      <button (click)="onNextBtn()" [disabled]="isNextDisabled()" 
-      class="action-button primary-button" matRipple>
+      <button (click)="onNextBtn()" [disabled]="isNextDisabled()" class="action-button primary-button" matRipple>
         <p>Next</p>
       </button>
     </div>
