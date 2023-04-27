@@ -46,7 +46,7 @@ export class QuizComponent implements OnInit {
         next: quiz => {
           if (!quiz._id) return
           quiz.questions = quiz.questions.map(q => {
-            return Object.assign({ isShowed: false }, q)
+            return Object.assign({ isAnswerVisible: false }, q)
           })
           this.quiz = quiz
           console.log(quiz);
