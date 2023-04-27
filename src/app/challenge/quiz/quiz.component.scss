@@ -1,14 +1,27 @@
 .action-button {
-    min-width: 220px;
+    min-width: 160px;
     flex-grow: unset;
 }
 
 .action-button-wrapper {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
     padding: 16px;
     padding-bottom: 32px;
-    flex-wrap: wrap;
+    width: 100%;
+    max-width: 460px;
+    .action-button {
+        min-width: unset;
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 300px) {
+    .action-button-wrapper { 
+        flex-wrap: wrap;
+    }
 }

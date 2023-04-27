@@ -20,13 +20,12 @@
     </div>
 
     <div class="action-button-wrapper" *ngIf="selectedTask">
-      <button (click)="onPrevBtn()"
-      class="action-button primary-stroked-button" matRipple 
-      [disabled]="isPrevDisabled()">
+      <button (click)="onPrevBtn()" [disabled]="isPrevDisabled()"
+      class="action-button primary-stroked-button" matRipple>
         <p>Prev</p>
       </button>
-      <button class="action-button primary-button" 
-      matRipple (click)="onNextBtn()" [disabled]="isNextDisabled()">
+      <button (click)="onNextBtn()" [disabled]="isNextDisabled()" 
+      class="action-button primary-button" matRipple>
         <p>Next</p>
       </button>
     </div>
