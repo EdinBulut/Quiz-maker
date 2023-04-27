@@ -4,9 +4,6 @@
 }
 
 .quiz-text-icon {
-    position: absolute;
-    top: 0;
-    margin: 24px auto;
     &:hover {
         background: var(--secondary-3);
     }
@@ -28,6 +25,11 @@
     }
 }
 
+.header {
+    position: absolute;
+    top: 0;
+    margin: 24px auto;
+}
 
 @media only screen and (max-width: 300px) {
     .action-button-wrapper { 

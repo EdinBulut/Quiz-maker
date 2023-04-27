@@ -1,9 +1,12 @@
 <div class="d-flex fd-column ai-center jc-center h-min-100vh w-100 gap-24 ">
-  <div class="white-icon quiz-text-icon icon-64 "></div>
+  <div class="d-flex ai-center jc-center gap-24 header">
+    <div class="white-icon quiz-text-icon icon-64"></div>
+    <h1 *ngIf="isPlaying" class="secondary-text">{{quiz.name}}</h1>
+  </div>
 
   <ng-container *ngIf="quiz">
     <div class="d-flex fd-column jc-center ai-center f-grow-1 w-100 gap-32">
-      <ng-container *ngIf="!selectedTask else taskContainer">
+      <ng-container *ngIf="!isPlaying else taskContainer">
         <div class="d-flex fd-column ai-center jc-center">
           <h1>{{quiz.name}}</h1>
           <h4 class="secondary-text">This quiz has {{quiz.questions.length}}
@@ -22,7 +25,7 @@
       </ng-template>
     </div>
 
-    <div class="action-button-wrapper" *ngIf="selectedTask">
+    <div class="action-button-wrapper" *ngIf="isPlaying">
       <button (click)="onPrevBtn()" [disabled]="isPrevDisabled()" class="action-button primary-stroked-button"
         matRipple>
         <p>Prev</p>

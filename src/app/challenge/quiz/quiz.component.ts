@@ -13,7 +13,6 @@ import { QuizAPIService } from 'src/app/shared/API/quizAPI/quiz-api.service';
 export class QuizComponent implements OnInit {
   quiz!: Quiz
   isPlaying = false
-  selectedTask!: Task
   currentIndex = 0
   private unsubscriber$: Subject<void> = new Subject<void>();
 
@@ -57,7 +56,7 @@ export class QuizComponent implements OnInit {
 
 
   playQuiz() {
-    this.selectedTask = this.quiz.questions[0]
+    this.isPlaying = true
   }
 
 
